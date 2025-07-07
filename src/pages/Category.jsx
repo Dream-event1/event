@@ -169,7 +169,7 @@ function CategoryPage() {
           {/* Buttons */}
           <div className="flex justify-center space-x-4">
             <a
-              href="/#contact"
+              href="tel:+918319200863"
               className="bg-pink-600 hover:bg-pink-700 text-white px-8 py-3 rounded-full font-semibold transition-colors"
             >
               Contact Us
