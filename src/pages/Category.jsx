@@ -254,7 +254,7 @@ function CategoryPage() {
 
       {/* WhatsApp Button */}
       <a
-        href="https://wa.me/919911300002"
+        href="https://wa.me/8319200863"
         target="_blank"
         rel="noopener noreferrer"
         className="fixed bottom-6 right-6 bg-green-500 hover:bg-green-600 text-white p-4 rounded-full shadow-lg transition-colors z-50"

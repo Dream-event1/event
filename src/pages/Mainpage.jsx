@@ -211,7 +211,8 @@ function MainPage() {
   return (
     <>
      <p className="fixed bottom-6 left-2 mb-5 z-22 bg-amber-300 text-black font-semibold mt-160 text-lg px-4 py-2 rounded-full "> 
-          call us at: <a href="tel:+918319200863" className="text-blue-600 hover:underline">+91 8319200863</a>
+          {/* call us at: <a href="tel:+918319200863" className="text-blue-600 hover:underline">+91 8319200863</a> */}
+          Call us- 8319200863
          </p>
     <div className="min-h-screen bg-gradient-to-br from-pink-50 to-purple-50 font-inter">
      
