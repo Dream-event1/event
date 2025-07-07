@@ -175,7 +175,7 @@ function CategoryPage() {
               Contact Us
             </a>
             <a
-              href="https://wa.me/919911300002"
+              href="https://wa.me/8319200863"
               target="_blank"
               rel="noopener noreferrer"
               className="bg-green-500 hover:bg-green-600 text-white px-8 py-3 rounded-full font-semibold transition-colors flex items-center"

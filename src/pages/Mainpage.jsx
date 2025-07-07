@@ -160,7 +160,7 @@ function MainPage() {
       `New Inquiry:\nName: ${name}\nEmail: ${email}\nPhone: ${phone}\nEvent: ${eventType}\nMessage: ${message}`
     );
     // Open WhatsApp chat with pre-filled message
-    window.open(`https://wa.me/7779952130?text=${text}`, "_blank");
+    window.open(`https://wa.me/8319200863?text=${text}`, "_blank");
 
     setFormData({ name: "", email: "", phone: "", eventType: "", message: "" });
   };
