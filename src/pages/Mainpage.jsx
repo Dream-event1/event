@@ -16,7 +16,7 @@ function MainPage() {
   const [heroImages, setHeroImages] = React.useState([]);
   const [services, setServices] = React.useState([]);
   const [adminForm, setAdminForm] = React.useState({
-    category: "welcome_baby",
+    category: "select one",
     images: [],
   });
   const [selectedImage, setSelectedImage] = React.useState(null);
@@ -27,8 +27,12 @@ function MainPage() {
     { category: "welcome_baby", title: "Welcome Baby Event", description: "Celebrate the arrival of your little one with beautiful decorations and memorable moments.", icon: "👶" },
     { category: "haldi_mehendi", title: "Haldi Mehendi", description: "Traditional pre-wedding ceremonies with vibrant colors and joyful celebrations.", icon: "🌺" },
     { category: "bride_groom_entry", title: "Bride & Groom Entry Setup", description: "Grand entrance setups that make your special moment unforgettable.", icon: "💒" },
-    { category: "theme_birthday", title: "Theme Birthday Decoration", description: "Creative themed birthday parties that bring joy and excitement to your celebration.", icon: "🎂" },
+    { category: "theme_birthday", title: "Theme Based Birthday Decoration", description: "Creative themed birthday parties that bring joy and excitement to your celebration.", icon: "🎂" },
     { category: "anniversary", title: "Anniversary Decoration", description: "Romantic and elegant setups to celebrate your love and milestones.", icon: "💕" },
+    { category: "firework", title: "Firework Decoration", description: "Make your Entry memorable using firework decoration.", icon: "🎆" },
+    { category: "flower_decoration", title: "Flower Decoration", description: "Romantic and elegant setups using flowers.", icon: "🌸" },
+    { category: "baby_shower", title: "Baby Shower Decoration", description: "Beautiful and elegant setups to celebrate your love and milestones.", icon: "🎈" },
+    // Add more categories as needed
   ];
 
   // Fetch images from backend
@@ -83,10 +87,30 @@ function MainPage() {
   }, [heroImages]);
 
   const handleFormSubmit = (e) => {
-    e.preventDefault();
-    alert("Thank you for your inquiry! We will contact you soon.");
-    setFormData({ name: "", email: "", phone: "", eventType: "", message: "" });
-  };
+  e.preventDefault();
+  const { name, email, phone, eventType, message } = formData;
+  if (!name || !email || !phone || !eventType || !message) {
+    alert("Please fill in all fields.");
+    return;
+  }
+  if (!/^\S+@\S+\.\S+$/.test(email)) {
+    alert("Please enter a valid email address.");
+    return;
+  }
+  if (!/^\d{10}$/.test(phone)) {
+    alert("Please enter a valid 10-digit phone number.");
+    return;
+  }
+
+  // Compose WhatsApp message
+  const text = encodeURIComponent(
+    `New Inquiry:\nName: ${name}\nEmail: ${email}\nPhone: ${phone}\nEvent: ${eventType}\nMessage: ${message}`
+  );
+  // Open WhatsApp chat with pre-filled message
+  window.open(`https://wa.me/7779952130?text=${text}`, "_blank");
+  
+  setFormData({ name: "", email: "", phone: "", eventType: "", message: "" });
+};
 
   const handleInputChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -185,7 +209,12 @@ function MainPage() {
   };
 
   return (
+    <>
+     <p className="fixed bottom-6 left-2 mb-5 z-22 bg-amber-300 text-black font-semibold mt-160 text-lg px-4 py-2 rounded-full "> 
+          call us at: <a href="tel:+918319200863" className="text-blue-600 hover:underline">+91 8319200863</a>
+         </p>
     <div className="min-h-screen bg-gradient-to-br from-pink-50 to-purple-50 font-inter">
+     
       {/* Full-size Image Modal */}
       {selectedImage && (
         <div className="fixed inset-0 bg-black/80 flex items-center justify-center z-50">
@@ -224,7 +253,7 @@ function MainPage() {
           <div className="flex justify-between items-center py-4">
             <div className="flex items-center">
               <div className="text-2xl font-bold text-pink-600">
-                ✨ V3 Events
+                ✨ Dream Event
               </div>
             </div>
             <nav className="hidden md:flex space-x-8">
@@ -333,17 +362,18 @@ function MainPage() {
         <div className="relative z-10 flex items-center justify-center h-full text-center text-white px-4">
           <div className="max-w-4xl">
             <h1 className="text-4xl md:text-6xl font-bold mb-6">
-              Award-Winning Event Organizer
+              DREAM EVENT AND BALLOON DECORATION
             </h1>
             <p className="text-xl md:text-2xl mb-8 opacity-90">
               Creating magical moments and unforgettable experiences
             </p>
-            <button className="bg-pink-600 hover:bg-pink-700 text-white px-8 py-4 rounded-full text-lg font-semibold transition-colors">
+            <a href="https://wa.me/8319200863" className="bg-pink-600 hover:bg-pink-700 text-white px-8 py-4 rounded-full text-lg font-semibold transition-colors" >
               Plan Your Event
-            </button>
+            </a>
           </div>
         </div>
 
+         
         {/* Slide indicators */}
         <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex space-x-2">
           {heroImages.map((_, index) => (
@@ -477,7 +507,7 @@ function MainPage() {
       </section>
 
       {/* Offers Section */}
-      <section
+      {/* <section
         id="offers"
         className="py-20 px-4 bg-gradient-to-r from-pink-100 to-purple-100"
       >
@@ -541,7 +571,60 @@ function MainPage() {
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
+
+      {/* Testimonial section */}
+
+      <section id="testimonials" className="py-20 px-4 bg-white">
+  <div className="max-w-7xl mx-auto">
+    <div className="text-center mb-16">
+      <h2 className="text-4xl font-bold text-gray-800 mb-4">What Our Clients Say</h2>
+      <p className="text-xl text-gray-600">Hear from those who’ve celebrated with us</p>
+    </div>
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+      {[
+        {
+          name: "Priyansh Sharma",
+          testimonial: "Dream Event made our baby’s welcome party magical! The decorations were perfect, and their team was so professional.",
+          image: "https://th.bing.com/th/id/OIP.nZeXcxr8dxowYfGxoZ99jAHaFd?w=259&h=190&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3/150",
+        },
+        {
+          name: "Rahul Verma",
+          testimonial: "Our wedding entry setup was breathtaking. Dream Event turned our vision into reality with such elegance!",
+          image: "https://th.bing.com/th/id/OIP.hCfHyL8u8XAbreXuaiTMQgHaHZ?w=194&h=193&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3/150",
+        },
+        {
+          name: "Ankit Desai",
+          testimonial: "The themed birthday party for my daughter was a hit! The kids loved it, and the photos are stunning.",
+          image: "https://th.bing.com/th/id/OIP.jwoZHKQLy5h-DT7a5EYBVQHaJQ?w=164&h=205&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3/150",
+        },
+        {
+          name: "Suresh Kumar",
+          testimonial: "Dream Event organized our anniversary celebration flawlessly. The flower decorations were beautiful and the service was top-notch.",
+          image: "https://th.bing.com/th/id/OIP.LC5QeewTlOYRlb0-6cg4vAHaNK?w=115&h=181&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3/150",
+        },
+        {
+          name: "Manish Singh",
+          testimonial: "I can’t thank Dream Event enough for the amazing firework decoration at our event. It was truly a night to remember!",
+          image: "https://th.bing.com/th/id/OIP.7jv8nJxT-423383lL9ew8QHaLH?w=129&h=193&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3/150",
+        },
+      ].map((client, index) => (
+        <div
+          key={index}
+          className="bg-gradient-to-br from-pink-50 to-purple-50 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-shadow text-center"
+        >
+          <img
+            src={client.image}
+            alt={client.name}
+            className="w-20 h-20 rounded-full mx-auto mb-4 object-cover border-2 border-pink-600"
+          />
+          <p className="text-gray-600 italic mb-4">"{client.testimonial}"</p>
+          <h4 className="text-lg font-semibold text-gray-800">{client.name}</h4>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
 
       {/* Contact Section */}
       <section id="contact" className="py-20 px-4 bg-white">
@@ -563,15 +646,15 @@ function MainPage() {
               <div className="space-y-4">
                 <div className="flex items-center">
                   <i className="fas fa-phone text-pink-600 text-xl w-8"></i>
-                  <span className="text-gray-700">+91 9911300002</span>
+                  <span className="text-gray-700">+91 8319200863</span>
                 </div>
                 <div className="flex items-center">
                   <i className="fas fa-envelope text-pink-600 text-xl w-8"></i>
-                  <span className="text-gray-700">info@v3events.com</span>
+                  <span className="text-gray-700">dreamevents1205@gmail.com</span>
                 </div>
                 <div className="flex items-center">
                   <i className="fas fa-map-marker-alt text-pink-600 text-xl w-8"></i>
-                  <span className="text-gray-700">Delhi NCR, India</span>
+                  <span className="text-gray-700">Supela, Bhilai,Chhattisgarh, India</span>
                 </div>
               </div>
             </div>
@@ -673,6 +756,10 @@ function MainPage() {
                 <option value="bride_groom_entry">Bride & Groom Entry Setup</option>
                 <option value="theme_birthday">Theme Birthday Decoration</option>
                 <option value="anniversary">Anniversary Decoration</option>
+                <option value="firework">Firework Decoration</option>
+                <option value="flower_decoration">Flower Decoration</option>
+                <option value="baby_shower">Baby Shower Decoration</option>
+
               </select>
             </div>
             <div>
@@ -701,7 +788,7 @@ function MainPage() {
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             <div>
-              <h3 className="text-2xl font-bold mb-4">✨ V3 Events</h3>
+              <h3 className="text-2xl font-bold mb-4">✨ Dream Event</h3>
               <p className="text-gray-300">
                 Creating magical moments and unforgettable experiences for your
                 special occasions.
@@ -712,7 +799,11 @@ function MainPage() {
               <ul className="space-y-2 text-gray-300">
                 <li>Wedding Planning</li>
                 <li>Birthday Parties</li>
-                <li>Corporate Events</li>
+                <li>Welcome baby Event</li>
+                <li>Baby Showers</li>
+                <li>Haldi and mehendi</li>
+                <li>Bride and groom Entry setup</li>
+                <li>Firework decoration</li>
                 <li>Anniversary Celebrations</li>
               </ul>
             </div>
@@ -744,27 +835,24 @@ function MainPage() {
             <div>
               <h4 className="text-lg font-semibold mb-4">Follow Us</h4>
               <div className="flex space-x-4">
-                <a href="#" className="text-gray-300 hover:text-pink-400">
+                {/* <a href="#" className="text-gray-300 hover:text-pink-400">
                   <i className="fab fa-facebook text-2xl"></i>
-                </a>
-                <a href="#" className="text-gray-300 hover:text-pink-400">
+                </a> */}
+                <a href="https://www.instagram.com/dream_events88/" className="text-gray-300 hover:text-pink-400">
                   <i className="fab fa-instagram text-2xl"></i>
-                </a>
-                <a href="#" className="text-gray-300 hover:text-pink-400">
-                  <i className="fab fa-twitter text-2xl"></i>
                 </a>
               </div>
             </div>
           </div>
           <div className="border-t border-gray-700 mt-8 pt-8 text-center text-gray-300">
-            <p>© 2025 V3 Events. All rights reserved.</p>
+            <p>© 2025 Dream Event. All rights reserved.</p>
           </div>
         </div>
       </footer>
 
       {/* WhatsApp Button */}
       <a
-        href="https://wa.me/919911300002"
+        href="https://wa.me/8319200863"
         target="_blank"
         rel="noopener noreferrer"
         className="fixed bottom-6 right-6 bg-green-500 hover:bg-green-600 text-white p-4 rounded-full shadow-lg transition-colors z-50"
@@ -772,6 +860,7 @@ function MainPage() {
         <i className="fab fa-whatsapp text-2xl"></i>
       </a>
     </div>
+    </>
   );
 }
 
