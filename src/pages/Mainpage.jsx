@@ -35,7 +35,7 @@ function MainPage() {
   React.useEffect(() => {
     const fetchImages = async () => {
       try {
-        const response = await fetch("http://localhost:5000/api/images");
+        const response = await fetch("https://event-manager-backend-sj89.onrender.com/api/images");
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
@@ -125,7 +125,7 @@ function MainPage() {
     adminForm.images.forEach((image) => formData.append('images', image));
 
     try {
-      const response = await fetch('http://localhost:5000/api/images', {
+      const response = await fetch('https://event-manager-backend-sj89.onrender.com/api/images', {
         method: 'POST',
         body: formData,
       });
@@ -136,7 +136,7 @@ function MainPage() {
       setAdminForm({ category: "welcome_baby", images: [] });
 
       // Refresh images
-      const updatedImages = await fetch("http://localhost:5000/api/images").then(res => res.json());
+      const updatedImages = await fetch("https://event-manager-backend-sj89.onrender.com/api/images").then(res => res.json());
       const heroData = updatedImages.find(item => item.category === "hero");
       setHeroImages(heroData ? heroData.imageUrls : []);
       const serviceData = predefinedCategories.map(category => {
