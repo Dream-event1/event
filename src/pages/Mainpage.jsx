@@ -14,6 +14,10 @@ function MainPage() {
   });
   const [visibleImageCounts, setVisibleImageCounts] = React.useState({});
   const [heroImages, setHeroImages] = React.useState([]);
+  const [hero, setHero]= React.useState([
+"/1001429288.jpg","/1001429327.jpg","/1001429328.jpg","/1001429355.jpg"
+
+  ]);
   const [services, setServices] = React.useState([]);
   const [adminForm, setAdminForm] = React.useState({
     category: "select one",
@@ -131,13 +135,13 @@ function MainPage() {
 
   // Hero carousel effect
   React.useEffect(() => {
-    if (heroImages.length > 0) {
+    if (hero.length > 0) {
       const interval = setInterval(() => {
-        setCurrentSlide((prev) => (prev + 1) % heroImages.length);
+        setCurrentSlide((prev) => (prev + 1) % hero.length);
       }, 4000);
       return () => clearInterval(interval);
     }
-  }, [heroImages]);
+  }, [hero]);
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
@@ -169,22 +173,26 @@ function MainPage() {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleShowMore = (serviceIndex) => {
-    setVisibleImageCounts((prev) => {
-      const currentCount = prev[serviceIndex] || 4;
-      const totalImages = services[serviceIndex].imageUrls.length;
-      const newCount = Math.min(currentCount + 4, totalImages);
-      return { ...prev, [serviceIndex]: newCount };
-    });
+  const handleCategoryClick = (category) => {
+    localStorage.setItem("selectedCategory", category);
+    navigate("/category");
   };
+  // const handleShowMore = (serviceIndex) => {
+  //   setVisibleImageCounts((prev) => {
+  //     const currentCount = prev[serviceIndex] || 4;
+  //     const totalImages = services[serviceIndex].imageUrls.length;
+  //     const newCount = Math.min(currentCount + 4, totalImages);
+  //     return { ...prev, [serviceIndex]: newCount };
+  //   });
+  // };
 
-  const handleShowLess = (serviceIndex) => {
-    setVisibleImageCounts((prev) => {
-      const currentCount = prev[serviceIndex] || 4;
-      const newCount = Math.max(currentCount - 4, 4);
-      return { ...prev, [serviceIndex]: newCount };
-    });
-  };
+  // const handleShowLess = (serviceIndex) => {
+  //   setVisibleImageCounts((prev) => {
+  //     const currentCount = prev[serviceIndex] || 4;
+  //     const newCount = Math.max(currentCount - 4, 4);
+  //     return { ...prev, [serviceIndex]: newCount };
+  //   });
+  // };
 
   // Admin form handlers
   const handleAdminInputChange = (e) => {
@@ -274,8 +282,10 @@ function MainPage() {
   return (
     <>
       <p className="fixed bottom-6 left-2 mb-5 z-22 bg-amber-300 text-black font-semibold mt-160 text-lg px-4 py-2 rounded-full ">
-        call us at: <a href="tel:+918319200863" className="text-blue-600 hover:underline">+91 8319200863</a>
-        
+        call us at:{" "}
+        <a href="tel:+918319200863" className="text-blue-600 hover:underline">
+          +91 8319200863
+        </a>
       </p>
       <div className="min-h-screen bg-gradient-to-br from-pink-50 to-purple-50 font-inter">
         {/* Full-size Image Modal */}
@@ -411,7 +421,7 @@ function MainPage() {
         {/* Hero Section */}
         <section id="home" className="relative h-screen overflow-hidden">
           <div className="absolute inset-0">
-            {heroImages.map((image, index) => (
+            {hero.map((image, index) => (
               <div
                 key={index}
                 className={`absolute inset-0 transition-opacity duration-1000 ${
@@ -460,120 +470,158 @@ function MainPage() {
         </section>
 
         {/* Choose By Gifts Category Section */}
-      <section id="gallery" className="py-20 px-4 bg-white">
-  <div className="max-w-7xl mx-auto">
-    <div className="text-center mb-16">
-      <h2 className="text-4xl font-bold text-gray-800 mb-4">
-        Our All Services
-      </h2>
-    </div>
-    <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-6">
-      {[
-        { img: "wedding-items.jpg", label: "Weddings Items" },
-        { img: "gifts-items.jpg", label: "Gifts Items" },
-        { img: "flowers-bouquet.jpg", label: "Flowers Bouquet" },
-        { img: "chocolates-bouquets.jpg", label: "Chocolates Bouquets" },
-        { img: "cakes.jpg", label: "Cakes" },
-        { img: "fresh-sweets.jpg", label: "Fresh Sweets" },
-        { img: "combo-offers.jpg", label: "Combo Offers" },
-        { img: "hampers.jpg", label: "Hampers" },
-        { img: "balloons-decor.jpg", label: "Balloons Decor" },
-        { img: "fresh-fruits-basket.jpg", label: "Fresh Fruits Basket" },
-        { img: "personalised-mugs.jpg", label: "Personalised Mugs" },
-      ].map((item, idx) => (
-        <div key={idx} className="flex flex-col items-center space-y-2">
-          <div className="w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 rounded-full overflow-hidden shadow-lg border-4 border-pink-200 flex items-center justify-center bg-white">
-            <img
-              src={item.img}
-              alt={item.label}
-              className="w-full h-full object-cover"
-            />
+        <section id="gallery" className="py-20 px-4 bg-white">
+          <div className="max-w-7xl mx-auto">
+            <div className="text-center mb-16">
+              <h2 className="text-4xl font-bold text-gray-800 mb-4">
+                Our All Services
+              </h2>
+            </div>
+            <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-6">
+              {[
+                { img: "/1001429269.jpg", label: "House Decoration" , },
+                { img: "https://th.bing.com/th/id/OIP.yK_Dm6YWF_-CgpkAh-fRxwHaHa?w=184&h=185&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3", label: "Haldi & Mehendi" },
+                { img: "https://th.bing.com/th/id/OIP.BeHUaZ9nPkfjQInm94pHpgHaE7?w=274&h=182&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3", label: "Flower Decoration" },
+                {
+                  img: "https://th.bing.com/th/id/OIP.bmD21QvgXpnrfK4rW-9BRwHaF9?w=205&h=180&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3",
+                  label: "Mandap Decoration",
+                },
+                { img: "https://th.bing.com/th/id/OIP.Bn6SUdmvf9BXeJay_16ZXgHaHJ?w=178&h=180&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3", label: "Bride & Groom entry" },
+                { img: "https://th.bing.com/th/id/OIP.jgB-LXImOOqxWbqaXyRQiQHaE8?w=240&h=180&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3", label: "FireWork" },
+                { img: "https://tse2.mm.bing.net/th/id/OIP.VqcPoKcsSEnsM1UacAxhmAAAAA?rs=1&pid=ImgDetMain&o=7&rm=3", label: "Engagement Decoration" },
+                { img: "https://th.bing.com/th/id/OIP.rbmmHX1YcX_1aNspE9Rr9wHaHq?w=187&h=194&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3", label: "Baby Shower Decoration" },
+                { img: "https://th.bing.com/th/id/OIF.qe1kSWqLCkDwDuAKxw5pXA?w=294&h=180&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3", label: "Birthday theme Decoration" },
+                {
+                  img: "https://th.bing.com/th/id/OIP.VJ6SCTmdlN-M4aoR9YQziAHaHa?o=7rm=3&rs=1&pid=ImgDetMain&o=7&rm=3",
+                  label: "Anniversary Decoration",
+                },
+                { img: "https://th.bing.com/th/id/OIP.vcwq7wQ0FmS3gSnKg-jdUAAAAA?w=227&h=209&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3", label: "Naming Ceremony" },
+                { img: "https://th.bing.com/th/id/OIP.Hhq-W3iaDkuHZs4vVqbmCQHaJQ?w=138&h=180&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3", label: "Car Decoration" },
+                { img: "https://th.bing.com/th/id/OIP.bMdF1nRtOS9_gCe_QxeBnAHaE8?w=235&h=180&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3", label: "Surprise Decoration" },
+                { img: "https://th.bing.com/th/id/OIP.lPF2NDkfSC5Ke5mit0ZHRAHaE7?w=266&h=180&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3", label: "Room Decoration" },
+                 { img: "https://th.bing.com/th/id/OIP.mGTlfWxRbfHq5qP3DnNVSgHaHa?w=164&h=180&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3", label: "Annaprashan Decoration" },
+                  { img: "https://th.bing.com/th/id/OIP.yewiWDAPFqJr0tyCFxbjzgHaE8?w=266&h=180&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3", label: "Birthday baby Entry" },
+               
+              ].map((item, idx) => (
+                <div
+                  key={idx}
+                  className="flex flex-col items-center space-y-2"
+                  onClick={() => handleCategoryClick(item.category)}
+                >
+                  <div className="w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 rounded-full overflow-hidden shadow-lg border-4 border-pink-200 flex items-center justify-center bg-white">
+                    <img
+                      src={item.img}
+                      alt={item.label}
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                  <span className="text-gray-800 font-bold text-center mt-2 text-xs sm:text-sm md:text-base">
+                    {item.label}
+                  </span>
+                </div>
+              ))}
+            </div>
           </div>
-          <span className="text-gray-800 font-bold text-center mt-2 text-xs sm:text-sm md:text-base">{item.label}</span>
-        </div>
-      ))}
-    </div>
-  </div>
-</section>
+        </section>
 
-       
-       {/* Choose By Wedding Category Section */}
-<section id="services" className="py-20 px-4 bg-white">
-  <div className="max-w-7xl mx-auto">
-    <div className="text-center mb-16">
-      <h2 className="text-4xl font-bold text-gray-800 mb-4">
-        Our Balloon Decoration Services
-      </h2>
-    </div>
-    <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-      {/* Example categories, replace with your actual data if needed */}
-      {[
-        { img: "house-decoration.jpg", label: "House Decoration" },
-        { img: "haldi-decoration.jpg", label: "Haldi Decoration" },
-        { img: "mehndi-decoration.jpg", label: "Mehndi Decoration" },
-        { img: "flowers-jewels.jpg", label: "Flowers Jewelr" },
-        { img: "luxury-car-decoration.jpg", label: "Luxury Car Decoration" },
-        { img: "varmala-garlands.jpg", label: "Varmala Garlands" },
-        { img: "artificial-varmala.jpg", label: "Artificial Varmala" },
-        { img: "wedding-bridal-entry.jpg", label: "Wedding Bridal Entry" },
-        { img: "phool-ki-chadar.jpg", label: "Phool Ki Chadar" },
-        { img: "balloons-decor-wedding.jpg", label: "Balloons Decor" },
-        { img: "room-decoration.jpg", label: "Room Decoration" },
-      ].map((item, idx) => (
-        <div key={idx} className="flex flex-col items-center space-y-2">
-          <div className="w-32 h-32 rounded-full overflow-hidden shadow-lg border-4 border-pink-200 flex items-center justify-center bg-white">
-            <img
-              src={item.img}
-              alt={item.label}
-              className="w-full h-full object-cover"
-            />
+        {/* Choose By Wedding Category Section */}
+        <section id="services" className="py-20 px-4 bg-white">
+          <div className="max-w-7xl mx-auto">
+            <div className="text-center mb-16">
+              <h2 className="text-4xl font-bold text-gray-800 mb-4">
+                Our Balloon Decoration Services
+              </h2>
+            </div>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+              {/* Example categories, replace with your actual data if needed */}
+              {[
+                { img: "https://th.bing.com/th/id/OIP.rbmmHX1YcX_1aNspE9Rr9wHaHq?w=187&h=194&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3", label: "Baby shower Decoration" },
+                { img: "haldi-decoration.jpg", label: "Welcome Baby Decoration" },
+                { img: "mehndi-decoration.jpg", label: "Birthday Theme Decoration" },
+                { img: "flowers-jewels.jpg", label: "Anniversary Decoration" },
+                {
+                  img: "luxury-car-decoration.jpg",
+                  label: "Naming Ceremony",
+                },
+                { img: "varmala-garlands.jpg", label: "Car Decoration" },
+                {
+                  img: "wedding-bridal-entry.jpg",
+                  label: "Annaprashan Decoration",
+                },
+                { img: "phool-ki-chadar.jpg", label: "Room Decoration" },
+                { img: "balloons-decor-wedding.jpg", label: "Baby Entry Decoration" },
+              ].map((item, idx) => (
+                <div
+                  key={idx}
+                  className="flex flex-col items-center space-y-2"
+                  onClick={() => handleCategoryClick(item.category)}
+                >
+                  <div className="w-32 h-32 rounded-full overflow-hidden shadow-lg border-4 border-pink-200 flex items-center justify-center bg-white">
+                    <img
+                      src={item.img}
+                      alt={item.label}
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                  <span className="text-gray-800 font-bold text-center mt-2">
+                    {item.label}
+                  </span>
+                </div>
+              ))}
+            </div>
           </div>
-          <span className="text-gray-800 font-bold text-center mt-2">{item.label}</span>
-        </div>
-      ))}
-    </div>
-  </div>
-</section>
+        </section>
 
+        {/* our balloon section */}
 
-   {/* our balloon section */}
-
-<section id="services" className="py-20 px-4 bg-white">
-  <div className="max-w-7xl mx-auto">
-    <div className="text-center mb-16">
-      <h2 className="text-4xl font-bold text-gray-800 mb-4">
-        Choose By Wedding Services
-      </h2>
-    </div>
-    <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-      {/* Example categories, replace with your actual data if needed */}
-      {[
-        { img: "house-decoration.jpg", label: "House Decoration" },
-        { img: "haldi-decoration.jpg", label: "Haldi Decoration" },
-        { img: "mehndi-decoration.jpg", label: "Mehndi Decoration" },
-        { img: "flowers-jewels.jpg", label: "Flowers Jewelr" },
-        { img: "luxury-car-decoration.jpg", label: "Luxury Car Decoration" },
-        { img: "varmala-garlands.jpg", label: "Varmala Garlands" },
-        { img: "artificial-varmala.jpg", label: "Artificial Varmala" },
-        { img: "wedding-bridal-entry.jpg", label: "Wedding Bridal Entry" },
-        { img: "phool-ki-chadar.jpg", label: "Phool Ki Chadar" },
-        { img: "balloons-decor-wedding.jpg", label: "Balloons Decor" },
-        { img: "room-decoration.jpg", label: "Room Decoration" },
-      ].map((item, idx) => (
-        <div key={idx} className="flex flex-col items-center space-y-2">
-          <div className="w-32 h-32 rounded-full overflow-hidden shadow-lg border-4 border-pink-200 flex items-center justify-center bg-white">
-            <img
-              src={item.img}
-              alt={item.label}
-              className="w-full h-full object-cover"
-            />
+        <section id="services" className="py-20 px-4 bg-white">
+          <div className="max-w-7xl mx-auto">
+            <div className="text-center mb-16">
+              <h2 className="text-4xl font-bold text-gray-800 mb-4">
+                Choose By Wedding Services
+              </h2>
+            </div>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+              {/* Example categories, replace with your actual data if needed */}
+              {[
+                { img: "house-decoration.jpg", label: "House Decoration" },
+                { img: "haldi-decoration.jpg", label: "Haldi Decoration" },
+                { img: "mehndi-decoration.jpg", label: "Mehndi Decoration" },
+                { img: "flowers-jewels.jpg", label: "Flowers Jewelr" },
+                {
+                  img: "luxury-car-decoration.jpg",
+                  label: "Luxury Car Decoration",
+                },
+                { img: "varmala-garlands.jpg", label: "Varmala Garlands" },
+                { img: "artificial-varmala.jpg", label: "Artificial Varmala" },
+                {
+                  img: "wedding-bridal-entry.jpg",
+                  label: "Wedding Bridal Entry",
+                },
+                { img: "phool-ki-chadar.jpg", label: "Phool Ki Chadar" },
+                { img: "balloons-decor-wedding.jpg", label: "Balloons Decor" },
+                { img: "room-decoration.jpg", label: "Room Decoration" },
+              ].map((item, idx) => (
+                <div
+                  key={idx}
+                  className="flex flex-col items-center space-y-2"
+                  onClick={() => handleCategoryClick(item.category)}
+                >
+                  <div className="w-32 h-32 rounded-full overflow-hidden shadow-lg border-4 border-pink-200 flex items-center justify-center bg-white">
+                    <img
+                      src={item.img}
+                      alt={item.label}
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                  <span className="text-gray-800 font-bold text-center mt-2">
+                    {item.label}
+                  </span>
+                </div>
+              ))}
+            </div>
           </div>
-          <span className="text-gray-800 font-bold text-center mt-2">{item.label}</span>
-        </div>
-      ))}
-    </div>
-  </div>
-</section>
+        </section>
         {/* Offers Section */}
         {/* <section
         id="offers"
@@ -641,380 +689,405 @@ function MainPage() {
         </div>
       </section> */}
 
-      {/* Our works */}
-      <section id="services-offered" className="py-10 px-4 bg-white">
-        <div className="max-w-7xl mx-auto">
-          <div className="mb-8">
-            <h2 className="text-2xl font-semibold text-white bg-red-500 p-4 rounded-t-lg">We Deal With</h2>
-            <div className="border border-gray-200 p-4 rounded-b-lg">
-              <ul className="space-y-2">
-                <li className="text-gray-800 font-bold">→ Theme Based Balloon Decoration</li>
-                <li className="text-gray-800 font-bold">→ Flower Decoration</li>
-                <li className="text-gray-800 font-bold">→ Haldi and Mehendi</li>
-                <li className="text-gray-800 font-bold">→ Stage Decoration</li>
-                <li className="text-gray-800 font-bold">→ Cold Pyro Entry</li>
-                <li className="text-gray-800 font-bold">→ Dry Ice Fog Entry</li>
-                <li className="text-gray-800 font-bold">→ Paper Blast Entry</li>
-                <li className="text-gray-800 font-bold">→ Balloon Blast Entry</li>
-                <li className="text-gray-800 font-bold">→ Bride Groom Entry</li>
-                <li className="text-gray-800 font-bold">→ Wedding Firework</li>
-              </ul>
-            </div>
-          </div>
-          <div>
-            <h2 className="text-2xl font-semibold text-white bg-red-600 p-4 rounded-t-lg">We Are Available For</h2>
-            <div className="border border-gray-200 p-4 rounded-b-lg">
-              <ul className="space-y-2">
-                <li className="text-gray-800 font-bold">→ Birthday</li>
-                <li className="text-gray-800 font-bold">→ Ring Ceremony</li>
-                <li className="text-gray-800 font-bold">→ Wedding Ceremony</li>
-                <li className="text-gray-800 font-bold">→ Naming Ceremony</li>
-                <li className="text-gray-800 font-bold">→ Cultural Event</li>
-                <li className="text-gray-800 font-bold">→ Get Together</li>
-                <li className="text-gray-800 font-bold">→ Anniversary</li>
-                <li className="text-gray-800 font-bold">→ School Function</li>
-                <li className="text-gray-800 font-bold">→ Pooja/Grih Pravesh</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Testimonial section */}
-      <section id="testimonials" className="py-20 px-4 bg-white">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-gray-800 mb-4">
-              What Our Clients Say
-            </h2>
-            <p className="text-xl text-gray-600">
-              Hear from those who’ve celebrated with us
-            </p>
-          </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-        
-            {/* Previous feedback cards */}
-            {[
-              {
-                name: "Priyansh Sharma",
-                testimonial:
-                  "Dream Event made our baby’s welcome party magical! The decorations were perfect, and their team was so professional.",
-                image:
-                  "https://th.bing.com/th/id/OIP.nZeXcxr8dxowYfGxoZ99jAHaFd?w=259&h=190&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3/150",
-              },
-              {
-                name: "Rahul Verma",
-                testimonial:
-                  "Our wedding entry setup was breathtaking. Dream Event turned our vision into reality with such elegance!",
-                image:
-                  "https://th.bing.com/th/id/OIP.hCfHyL8u8XAbreXuaiTMQgHaHZ?w=194&h=193&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3/150",
-              },
-              {
-                name: "Ankit Desai",
-                testimonial:
-                  "The themed birthday party for my daughter was a hit! The kids loved it, and the photos are stunning.",
-                image:
-                  "https://th.bing.com/th/id/OIP.jwoZHKQLy5h-DT7a5EYBVQHaJQ?w=164&h=205&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3/150",
-              },
-              {
-                name: "Suresh Kumar",
-                testimonial:
-                  "Dream Event organized our anniversary celebration flawlessly. The flower decorations were beautiful and the service was top-notch.",
-                image:
-                  "https://th.bing.com/th/id/OIP.LC5QeewTlOYRlb0-6cg4vAHaNK?w=115&h=181&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3/150",
-              },
-              {
-                name: "Manish Singh",
-                testimonial:
-                  "I can’t thank Dream Event enough for the amazing firework decoration at our event. It was truly a night to remember!",
-                image:
-                  "https://th.bing.com/th/id/OIP.7jv8nJxT-423383lL9ew8QHaLH?w=129&h=193&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3/150",
-              },
-            ].map((client, index) => (
-              <div
-                key={index}
-                className="bg-gradient-to-br from-pink-50 to-purple-50 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-shadow text-center"
-              >
-                <img
-                  src={client.image}
-                  alt={client.name}
-                  className="w-20 h-20 rounded-full mx-auto mb-4 object-cover border-2 border-pink-600"
-                />
-                <p className="text-gray-600 italic mb-4">
-                  "{client.testimonial}"
-                </p>
-                <h4 className="text-lg font-semibold text-gray-800">
-                  {client.name}
-                </h4>
+        {/* Our works */}
+        <section id="services-offered" className="py-10 px-4 bg-white">
+          <div className="max-w-7xl mx-auto">
+            <div className="mb-8">
+              <h2 className="text-2xl font-semibold text-white bg-red-500 p-4 rounded-t-lg">
+                We Deal With
+              </h2>
+              <div className="border border-gray-200 p-4 rounded-b-lg">
+                <ul className="space-y-2">
+                  <li className="text-gray-800 font-bold">
+                    → Theme Based Balloon Decoration
+                  </li>
+                  <li className="text-gray-800 font-bold">
+                    → Flower Decoration
+                  </li>
+                  <li className="text-gray-800 font-bold">
+                    → Haldi and Mehendi
+                  </li>
+                  <li className="text-gray-800 font-bold">
+                    → Stage Decoration
+                  </li>
+                  <li className="text-gray-800 font-bold">→ Cold Pyro Entry</li>
+                  <li className="text-gray-800 font-bold">
+                    → Dry Ice Fog Entry
+                  </li>
+                  <li className="text-gray-800 font-bold">
+                    → Paper Blast Entry
+                  </li>
+                  <li className="text-gray-800 font-bold">
+                    → Balloon Blast Entry
+                  </li>
+                  <li className="text-gray-800 font-bold">
+                    → Bride Groom Entry
+                  </li>
+                  <li className="text-gray-800 font-bold">
+                    → Wedding Firework
+                  </li>
+                </ul>
               </div>
-            ))}
-
-    {/* Google Reviews Card */}
-            <div className="bg-gradient-to-br from-pink-50 to-purple-50 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-shadow text-center flex flex-col items-center justify-center">
-              <i className="fab fa-google text-5xl text-[#fc3838] mb-4"></i>
-              <p className="text-gray-800 font-bold text-lg mb-2">
-                100+ Client Reviews on Google
-              </p>
-              <a
-                href="https://maps.app.goo.gl/3roLBjgaBZoTKqfZA"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-blue-600 hover:underline font-semibold"
-              >
-                See all reviews on Google
-              </a>
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Contact Section */}
-      <section id="contact" className="py-20 px-4 bg-white">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-gray-800 mb-4">
-              Contact Us
-            </h2>
-            <p className="text-xl text-gray-600">
-              Let's plan your perfect event together
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
             <div>
-              <h3 className="text-2xl font-bold text-gray-800 mb-6">
-                Get In Touch
-              </h3>
-              <div className="space-y-4">
-                <div className="flex items-center">
-                  <i className="fas fa-phone text-pink-600 text-xl w-8"></i>
-                  <span className="text-gray-700">+91 8319200863</span>
-                </div>
-                <div className="flex items-center">
-                  <i className="fas fa-envelope text-pink-600 text-xl w-8"></i>
-                  <span className="text-gray-700">
-                    satishkhare88@gmail.com
-                  </span>
-                </div>
-                <div className="flex items-center">
-                  <i className="fas fa-map-marker-alt text-pink-600 text-xl w-8"></i>
-                  <span className="text-gray-700">
-                    Supela, Bhilai,Chhattisgarh, India
-                  </span>
-                </div>
+              <h2 className="text-2xl font-semibold text-white bg-red-600 p-4 rounded-t-lg">
+                We Are Available For
+              </h2>
+              <div className="border border-gray-200 p-4 rounded-b-lg">
+                <ul className="space-y-2">
+                  <li className="text-gray-800 font-bold">→ Birthday</li>
+                  <li className="text-gray-800 font-bold">→ Ring Ceremony</li>
+                  <li className="text-gray-800 font-bold">
+                    → Wedding Ceremony
+                  </li>
+                  <li className="text-gray-800 font-bold">→ Naming Ceremony</li>
+                  <li className="text-gray-800 font-bold">→ Cultural Event</li>
+                  <li className="text-gray-800 font-bold">→ Get Together</li>
+                  <li className="text-gray-800 font-bold">→ Anniversary</li>
+                  <li className="text-gray-800 font-bold">→ School Function</li>
+                  <li className="text-gray-800 font-bold">
+                    → Pooja/Grih Pravesh
+                  </li>
+                </ul>
               </div>
             </div>
+          </div>
+        </section>
 
-            <form onSubmit={handleFormSubmit} className="space-y-6">
-              <div>
-                <input
-                  type="text"
-                  name="name"
-                  placeholder="Your Name"
-                  value={formData.name}
-                  onChange={handleInputChange}
-                  required
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent"
-                />
+        {/* Testimonial section */}
+        <section id="testimonials" className="py-20 px-4 bg-white">
+          <div className="max-w-7xl mx-auto">
+            <div className="text-center mb-16">
+              <h2 className="text-4xl font-bold text-gray-800 mb-4">
+                What Our Clients Say
+              </h2>
+              <p className="text-xl text-gray-600">
+                Hear from those who’ve celebrated with us
+              </p>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+              {/* Previous feedback cards */}
+              {[
+                {
+                  name: "Priyansh Sharma",
+                  testimonial:
+                    "Dream Event made our baby’s welcome party magical! The decorations were perfect, and their team was so professional.",
+                  image:
+                    "https://th.bing.com/th/id/OIP.nZeXcxr8dxowYfGxoZ99jAHaFd?w=259&h=190&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3/150",
+                },
+                {
+                  name: "Rahul Verma",
+                  testimonial:
+                    "Our wedding entry setup was breathtaking. Dream Event turned our vision into reality with such elegance!",
+                  image:
+                    "https://th.bing.com/th/id/OIP.hCfHyL8u8XAbreXuaiTMQgHaHZ?w=194&h=193&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3/150",
+                },
+                {
+                  name: "Ankit Desai",
+                  testimonial:
+                    "The themed birthday party for my daughter was a hit! The kids loved it, and the photos are stunning.",
+                  image:
+                    "https://th.bing.com/th/id/OIP.jwoZHKQLy5h-DT7a5EYBVQHaJQ?w=164&h=205&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3/150",
+                },
+                {
+                  name: "Suresh Kumar",
+                  testimonial:
+                    "Dream Event organized our anniversary celebration flawlessly. The flower decorations were beautiful and the service was top-notch.",
+                  image:
+                    "https://th.bing.com/th/id/OIP.LC5QeewTlOYRlb0-6cg4vAHaNK?w=115&h=181&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3/150",
+                },
+                {
+                  name: "Manish Singh",
+                  testimonial:
+                    "I can’t thank Dream Event enough for the amazing firework decoration at our event. It was truly a night to remember!",
+                  image:
+                    "https://th.bing.com/th/id/OIP.7jv8nJxT-423383lL9ew8QHaLH?w=129&h=193&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3/150",
+                },
+              ].map((client, index) => (
+                <div
+                  key={index}
+                  className="bg-gradient-to-br from-pink-50 to-purple-50 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-shadow text-center"
+                >
+                  <img
+                    src={client.image}
+                    alt={client.name}
+                    className="w-20 h-20 rounded-full mx-auto mb-4 object-cover border-2 border-pink-600"
+                  />
+                  <p className="text-gray-600 italic mb-4">
+                    "{client.testimonial}"
+                  </p>
+                  <h4 className="text-lg font-semibold text-gray-800">
+                    {client.name}
+                  </h4>
+                </div>
+              ))}
+
+              {/* Google Reviews Card */}
+              <div className="bg-gradient-to-br from-pink-50 to-purple-50 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-shadow text-center flex flex-col items-center justify-center">
+                <i className="fab fa-google text-5xl text-[#fc3838] mb-4"></i>
+                <p className="text-gray-800 font-bold text-lg mb-2">
+                  100+ Client Reviews on Google
+                </p>
+                <a
+                  href="https://maps.app.goo.gl/3roLBjgaBZoTKqfZA"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-blue-600 hover:underline font-semibold"
+                >
+                  See all reviews on Google
+                </a>
               </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Contact Section */}
+        <section id="contact" className="py-20 px-4 bg-white">
+          <div className="max-w-7xl mx-auto">
+            <div className="text-center mb-16">
+              <h2 className="text-4xl font-bold text-gray-800 mb-4">
+                Contact Us
+              </h2>
+              <p className="text-xl text-gray-600">
+                Let's plan your perfect event together
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
               <div>
-                <input
-                  type="email"
-                  name="email"
-                  placeholder="Your Email"
-                  value={formData.email}
-                  onChange={handleInputChange}
-                  required
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent"
-                />
+                <h3 className="text-2xl font-bold text-gray-800 mb-6">
+                  Get In Touch
+                </h3>
+                <div className="space-y-4">
+                  <div className="flex items-center">
+                    <i className="fas fa-phone text-pink-600 text-xl w-8"></i>
+                    <span className="text-gray-700">+91 8319200863</span>
+                  </div>
+                  <div className="flex items-center">
+                    <i className="fas fa-envelope text-pink-600 text-xl w-8"></i>
+                    <span className="text-gray-700">
+                      satishkhare88@gmail.com
+                    </span>
+                  </div>
+                  <div className="flex items-center">
+                    <i className="fas fa-map-marker-alt text-pink-600 text-xl w-8"></i>
+                    <span className="text-gray-700">
+                      Supela, Bhilai,Chhattisgarh, India
+                    </span>
+                  </div>
+                </div>
               </div>
-              <div>
-                <input
-                  type="tel"
-                  name="phone"
-                  placeholder="Your Phone"
-                  value={formData.phone}
-                  onChange={handleInputChange}
-                  required
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent"
-                />
-              </div>
+
+              <form onSubmit={handleFormSubmit} className="space-y-6">
+                <div>
+                  <input
+                    type="text"
+                    name="name"
+                    placeholder="Your Name"
+                    value={formData.name}
+                    onChange={handleInputChange}
+                    required
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent"
+                  />
+                </div>
+                <div>
+                  <input
+                    type="email"
+                    name="email"
+                    placeholder="Your Email"
+                    value={formData.email}
+                    onChange={handleInputChange}
+                    required
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent"
+                  />
+                </div>
+                <div>
+                  <input
+                    type="tel"
+                    name="phone"
+                    placeholder="Your Phone"
+                    value={formData.phone}
+                    onChange={handleInputChange}
+                    required
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent"
+                  />
+                </div>
+                <div>
+                  <select
+                    name="eventType"
+                    value={formData.eventType}
+                    onChange={handleInputChange}
+                    required
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent"
+                  >
+                    <option value="">Select Event Type</option>
+                    {services.map((service, index) => (
+                      <option key={index} value={service.title}>
+                        {service.title}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+                <div>
+                  <textarea
+                    name="message"
+                    placeholder="Your Message"
+                    value={formData.message}
+                    onChange={handleInputChange}
+                    rows="4"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent"
+                  />
+                </div>
+                <button
+                  type="submit"
+                  className="w-full bg-pink-600 hover:bg-pink-700 text-white py-3 px-6 rounded-lg font-semibold transition-colors"
+                >
+                  Send Message
+                </button>
+              </form>
+            </div>
+          </div>
+        </section>
+
+        {/* Admin Section */}
+        <section id="admin" className="py-20 px-4 bg-white">
+          <div className="max-w-7xl mx-auto">
+            <div className="text-center mb-16">
+              <h2 className="text-4xl font-bold text-gray-800 mb-4">
+                Admin: Upload Images
+              </h2>
+              <p className="text-xl text-gray-600">
+                Add new images to a category
+              </p>
+            </div>
+            <form
+              onSubmit={handleAdminSubmit}
+              className="max-w-lg mx-auto space-y-6"
+            >
               <div>
                 <select
-                  name="eventType"
-                  value={formData.eventType}
-                  onChange={handleInputChange}
+                  name="category"
+                  value={adminForm.category}
+                  onChange={handleAdminInputChange}
                   required
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent"
                 >
-                  <option value="">Select Event Type</option>
-                  {services.map((service, index) => (
-                    <option key={index} value={service.title}>
-                      {service.title}
-                    </option>
-                  ))}
+                  <option value="hero">Hero Images</option>
+                  <option value="welcome_baby">Welcome Baby Event</option>
+                  <option value="haldi_mehendi">Haldi Mehendi</option>
+                  <option value="bride_groom_entry">
+                    Bride & Groom Entry Setup
+                  </option>
+                  <option value="theme_birthday">
+                    Theme Birthday Decoration
+                  </option>
+                  <option value="anniversary">Anniversary Decoration</option>
+                  <option value="firework">Firework Decoration</option>
+                  <option value="flower_decoration">Flower Decoration</option>
+                  <option value="baby_shower">Baby Shower Decoration</option>
                 </select>
               </div>
               <div>
-                <textarea
-                  name="message"
-                  placeholder="Your Message"
-                  value={formData.message}
-                  onChange={handleInputChange}
-                  rows="4"
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent"
+                <input
+                  type="file"
+                  name="images"
+                  onChange={handleFileChange}
+                  multiple
+                  accept="image/jpeg,image/png"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg"
+                  required
                 />
               </div>
               <button
                 type="submit"
                 className="w-full bg-pink-600 hover:bg-pink-700 text-white py-3 px-6 rounded-lg font-semibold transition-colors"
               >
-                Send Message
+                Upload Images
               </button>
             </form>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* Admin Section */}
-      <section id="admin" className="py-20 px-4 bg-white">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-gray-800 mb-4">
-              Admin: Upload Images
-            </h2>
-            <p className="text-xl text-gray-600">
-              Add new images to a category
-            </p>
-          </div>
-          <form
-            onSubmit={handleAdminSubmit}
-            className="max-w-lg mx-auto space-y-6"
-          >
-            <div>
-              <select
-                name="category"
-                value={adminForm.category}
-                onChange={handleAdminInputChange}
-                required
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent"
-              >
-                <option value="hero">Hero Images</option>
-                <option value="welcome_baby">Welcome Baby Event</option>
-                <option value="haldi_mehendi">Haldi Mehendi</option>
-                <option value="bride_groom_entry">
-                  Bride & Groom Entry Setup
-                </option>
-                <option value="theme_birthday">
-                  Theme Birthday Decoration
-                </option>
-                <option value="anniversary">Anniversary Decoration</option>
-                <option value="firework">Firework Decoration</option>
-                <option value="flower_decoration">Flower Decoration</option>
-                <option value="baby_shower">Baby Shower Decoration</option>
-              </select>
-            </div>
-            <div>
-              <input
-                type="file"
-                name="images"
-                onChange={handleFileChange}
-                multiple
-                accept="image/jpeg,image/png"
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg"
-                required
-              />
-            </div>
-            <button
-              type="submit"
-              className="w-full bg-pink-600 hover:bg-pink-700 text-white py-3 px-6 rounded-lg font-semibold transition-colors"
-            >
-              Upload Images
-            </button>
-          </form>
-        </div>
-      </section>
-
-      {/* Footer */}
-      <footer className="bg-gray-800 text-white py-12 px-4">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-            <div>
-              <h3 className="text-2xl font-bold mb-4">✨ Dream Event</h3>
-              <p className="text-gray-300">
-                Creating magical moments and unforgettable experiences for
-                your special occasions.
-              </p>
-            </div>
-            <div>
-              <h4 className="text-lg font-semibold mb-4">Services</h4>
-              <ul className="space-y-2 text-gray-300">
-                <li>Wedding Planning</li>
-                <li>Birthday Parties</li>
-                <li>Welcome baby Event</li>
-                <li>Baby Showers</li>
-                <li>Haldi and mehendi</li>
-                <li>Bride and groom Entry setup</li>
-                <li>Firework decoration</li>
-                <li>Anniversary Celebrations</li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="text-lg font-semibold mb-4">Quick Links</h4>
-              <ul className="space-y-2 text-gray-300">
-                <li>
-                  <a href="#home" className="hover:text-pink-400">
-                    Home
-                  </a>
-                </li>
-                <li>
-                  <a href="#gallery" className="hover:text-pink-400">
-                    Gallery
-                  </a>
-                </li>
-                <li>
-                  <a href="#services" className="hover:text-pink-400">
-                    Services
-                  </a>
-                </li>
-                <li>
-                  <a href="#contact" className="hover:text-pink-400">
-                    Contact
-                  </a>
-                </li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="text-lg font-semibold mb-4">Follow Us</h4>
-              <div className="flex space-x-4">
-                {/* <a href="#" className="text-gray-300 hover:text-pink-400">
+        {/* Footer */}
+        <footer className="bg-gray-800 text-white py-12 px-4">
+          <div className="max-w-7xl mx-auto">
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+              <div>
+                <h3 className="text-2xl font-bold mb-4">✨ Dream Event</h3>
+                <p className="text-gray-300">
+                  Creating magical moments and unforgettable experiences for
+                  your special occasions.
+                </p>
+              </div>
+              <div>
+                <h4 className="text-lg font-semibold mb-4">Services</h4>
+                <ul className="space-y-2 text-gray-300">
+                  <li>Wedding Planning</li>
+                  <li>Birthday Parties</li>
+                  <li>Welcome baby Event</li>
+                  <li>Baby Showers</li>
+                  <li>Haldi and mehendi</li>
+                  <li>Bride and groom Entry setup</li>
+                  <li>Firework decoration</li>
+                  <li>Anniversary Celebrations</li>
+                </ul>
+              </div>
+              <div>
+                <h4 className="text-lg font-semibold mb-4">Quick Links</h4>
+                <ul className="space-y-2 text-gray-300">
+                  <li>
+                    <a href="#home" className="hover:text-pink-400">
+                      Home
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#gallery" className="hover:text-pink-400">
+                      Gallery
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#services" className="hover:text-pink-400">
+                      Services
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#contact" className="hover:text-pink-400">
+                      Contact
+                    </a>
+                  </li>
+                </ul>
+              </div>
+              <div>
+                <h4 className="text-lg font-semibold mb-4">Follow Us</h4>
+                <div className="flex space-x-4">
+                  {/* <a href="#" className="text-gray-300 hover:text-pink-400">
                 <i className="fab fa-facebook text-2xl"></i>
               </a> */}
-                <a
-                  href="https://www.instagram.com/dream_events88/"
-                  className="text-gray-300 hover:text-pink-400"
-                >
-                  <i className="fab fa-instagram text-2xl"></i>
-                </a>
+                  <a
+                    href="https://www.instagram.com/dream_events88/"
+                    className="text-gray-300 hover:text-pink-400"
+                  >
+                    <i className="fab fa-instagram text-2xl"></i>
+                  </a>
+                </div>
               </div>
             </div>
+            <div className="border-t border-gray-700 mt-8 pt-8 text-center text-gray-300">
+              <p>© 2025 Dream Event. All rights reserved.</p>
+            </div>
           </div>
-          <div className="border-t border-gray-700 mt-8 pt-8 text-center text-gray-300">
-            <p>© 2025 Dream Event. All rights reserved.</p>
-          </div>
-        </div>
-      </footer>
+        </footer>
 
-      {/* WhatsApp Button */}
-      <a
-        href="https://wa.me/8319200863"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="fixed bottom-6 right-6 bg-green-500 hover:bg-green-600 text-white p-4 rounded-full shadow-lg transition-colors z-50"
-      >
-        <i className="fab fa-whatsapp text-2xl"></i>
-      </a>
-    </div>
+        {/* WhatsApp Button */}
+        <a
+          href="https://wa.me/8319200863"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="fixed bottom-6 right-6 bg-green-500 hover:bg-green-600 text-white p-4 rounded-full shadow-lg transition-colors z-50"
+        >
+          <i className="fab fa-whatsapp text-2xl"></i>
+        </a>
+      </div>
     </>
   );
 }
