@@ -1,6 +1,7 @@
 "use client";
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import categoryData from "./category";
 
 function MainPage() {
   const navigate = useNavigate();
@@ -14,9 +15,11 @@ function MainPage() {
   });
   const [visibleImageCounts, setVisibleImageCounts] = React.useState({});
   const [heroImages, setHeroImages] = React.useState([]);
-  const [hero, setHero]= React.useState([
-"/1001429288.jpg","/1001429327.jpg","/1001429328.jpg","/1001429355.jpg"
-
+  const [hero, setHero] = React.useState([
+    "/1001429288.jpg",
+    "/1001429327.jpg",
+    "/1001429328.jpg",
+    "/1001429355.jpg",
   ]);
   const [services, setServices] = React.useState([]);
   const [adminForm, setAdminForm] = React.useState({
@@ -27,111 +30,55 @@ function MainPage() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
 
   // Predefined categories to ensure exactly 6 sections
-  const predefinedCategories = [
-    {
-      category: "welcome_baby",
-      title: "Welcome Baby Event",
-      description:
-        "Celebrate the arrival of your little one with beautiful decorations and memorable moments.",
-      icon: "👶",
-    },
-    {
-      category: "haldi_mehendi",
-      title: "Haldi Mehendi",
-      description:
-        "Traditional pre-wedding ceremonies with vibrant colors and joyful celebrations.",
-      icon: "🌺",
-    },
-    {
-      category: "bride_groom_entry",
-      title: "Bride & Groom Entry Setup",
-      description:
-        "Grand entrance setups that make your special moment unforgettable.",
-      icon: "💒",
-    },
-    {
-      category: "theme_birthday",
-      title: "Theme Based Birthday Decoration",
-      description:
-        "Creative themed birthday parties that bring joy and excitement to your celebration.",
-      icon: "🎂",
-    },
-    {
-      category: "anniversary",
-      title: "Anniversary Decoration",
-      description:
-        "Romantic and elegant setups to celebrate your love and milestones.",
-      icon: "💕",
-    },
-    {
-      category: "firework",
-      title: "Firework Decoration",
-      description: "Make your Entry memorable using firework decoration.",
-      icon: "🎆",
-    },
-    {
-      category: "flower_decoration",
-      title: "Flower Decoration",
-      description: "Romantic and elegant setups using flowers.",
-      icon: "🌸",
-    },
-    {
-      category: "baby_shower",
-      title: "Baby Shower Decoration",
-      description:
-        "Beautiful and elegant setups to celebrate your love and milestones.",
-      icon: "🎈",
-    },
-    // Add more categories as needed
-  ];
+ 
 
   // Fetch images from backend
-  React.useEffect(() => {
-    const fetchImages = async () => {
-      try {
-        const response = await fetch(
-          "https://event-manager-backend-sj89.onrender.com/api/images"
-        );
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        const data = await response.json();
+  // React.useEffect(() => {
+  //   const fetchImages = async () => {
+  //     try {
+  //       const response = await fetch(
+  //         "https://event-manager-backend-sj89.onrender.com/api/images"
+  //       );
+  //       if (!response.ok) {
+  //         throw new Error(`HTTP error! status: ${response.status}`);
+  //       }
+  //       const data = await response.json();
 
-        // Set hero images
-        const heroData = data.find((item) => item.category === "hero");
-        setHeroImages(heroData ? heroData.imageUrls : []);
+  //       // Set hero images
+  //       const heroData = data.find((item) => item.category === "hero");
+  //       setHeroImages(heroData ? heroData.imageUrls : []);
 
-        // Map backend data to predefined categories
-        const serviceData = predefinedCategories.map((category) => {
-          const backendData = data.find(
-            (item) => item.category === category.category
-          );
-          return {
-            ...category,
-            imageUrls: backendData ? backendData.imageUrls : [],
-          };
-        });
+  //       // Map backend data to predefined categories
+  //       const serviceData = predefinedCategories.map((category) => {
+  //         const backendData = data.find(
+  //           (item) => item.category === category.category
+  //         );
+  //         return {
+  //           ...category,
+  //           imageUrls: backendData ? backendData.imageUrls : [],
+  //         };
+  //       });
 
-        setServices(serviceData);
+  //       setServices(serviceData);
 
-        // Initialize visible image counts for each service
-        setVisibleImageCounts(
-          serviceData.reduce(
-            (acc, item, index) => ({
-              ...acc,
-              [index]: Math.min(4, item.imageUrls.length),
-            }),
-            {}
-          )
-        );
-      } catch (error) {
-        console.error("Error fetching images:", error);
-        alert("Failed to fetch images from the server.");
-      }
-    };
+  //       // Initialize visible image counts for each service
+  //       setVisibleImageCounts(
+  //         serviceData.reduce(
+  //           (acc, item, index) => ({
+  //             ...acc,
+  //             [index]: Math.min(4, item.imageUrls.length),
+  //           }),
+  //           {}
+  //         )
+  //       );
+  //     } catch (error) {
+  //       console.error("Error fetching images:", error);
+  //       alert("Failed to fetch images from the server.");
+  //     }
+  //   };
 
-    fetchImages();
-  }, []);
+  //   fetchImages();
+  // }, []);
 
   // Hero carousel effect
   React.useEffect(() => {
@@ -174,7 +121,8 @@ function MainPage() {
   };
 
   const handleCategoryClick = (category) => {
-    localStorage.setItem("selectedCategory", category);
+    console.log(category);
+    localStorage.setItem("SelectedCategory", category);
     navigate("/category");
   };
   // const handleShowMore = (serviceIndex) => {
@@ -264,10 +212,10 @@ function MainPage() {
   };
 
   // Handle Explore button click
-  const handleExploreClick = (category) => {
-    localStorage.setItem("selectedCategory", category);
-    navigate("/category");
-  };
+  // const handleExploreClick = (category) => {
+  //   localStorage.setItem("selectedCategory", category);
+  //   navigate("/category/:id");
+  // };
 
   // Toggle mobile menu
   const toggleMobileMenu = () => {
@@ -479,29 +427,85 @@ function MainPage() {
             </div>
             <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-6">
               {[
-                { img: "/1001429269.jpg", label: "House Decoration" , },
-                { img: "https://th.bing.com/th/id/OIP.yK_Dm6YWF_-CgpkAh-fRxwHaHa?w=184&h=185&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3", label: "Haldi & Mehendi" },
-                { img: "https://th.bing.com/th/id/OIP.BeHUaZ9nPkfjQInm94pHpgHaE7?w=274&h=182&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3", label: "Flower Decoration" },
+                { img: "/1001429269.jpg",
+                   label: "House Decoration" ,
+                   category:"house-decoration"
+                  },
+                {
+                  img: "https://th.bing.com/th/id/OIP.yK_Dm6YWF_-CgpkAh-fRxwHaHa?w=184&h=185&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3",
+                  label: "Haldi & Mehendi",
+                  category: "haldi-mehendi"
+                },
+                {
+                  img: "https://th.bing.com/th/id/OIP.BeHUaZ9nPkfjQInm94pHpgHaE7?w=274&h=182&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3",
+                  label: "Flower Decoration",
+                  category: "flower-decoration"
+                },
                 {
                   img: "https://th.bing.com/th/id/OIP.bmD21QvgXpnrfK4rW-9BRwHaF9?w=205&h=180&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3",
                   label: "Mandap Decoration",
+                  category: "mandap-decoration"
                 },
-                { img: "https://th.bing.com/th/id/OIP.Bn6SUdmvf9BXeJay_16ZXgHaHJ?w=178&h=180&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3", label: "Bride & Groom entry" },
-                { img: "https://th.bing.com/th/id/OIP.jgB-LXImOOqxWbqaXyRQiQHaE8?w=240&h=180&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3", label: "FireWork" },
-                { img: "https://tse2.mm.bing.net/th/id/OIP.VqcPoKcsSEnsM1UacAxhmAAAAA?rs=1&pid=ImgDetMain&o=7&rm=3", label: "Engagement Decoration" },
-                { img: "https://th.bing.com/th/id/OIP.rbmmHX1YcX_1aNspE9Rr9wHaHq?w=187&h=194&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3", label: "Baby Shower Decoration" },
-                { img: "https://th.bing.com/th/id/OIF.qe1kSWqLCkDwDuAKxw5pXA?w=294&h=180&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3", label: "Birthday theme Decoration" },
+                {
+                  img: "https://th.bing.com/th/id/OIP.Bn6SUdmvf9BXeJay_16ZXgHaHJ?w=178&h=180&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3",
+                  label: "Bride & Groom entry",
+                  category:"bride-groom-entry"
+                },
+                {
+                  img: "https://th.bing.com/th/id/OIP.jgB-LXImOOqxWbqaXyRQiQHaE8?w=240&h=180&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3",
+                  label: "FireWork",
+                  category: "firework"
+                },
+                {
+                  img: "https://tse2.mm.bing.net/th/id/OIP.VqcPoKcsSEnsM1UacAxhmAAAAA?rs=1&pid=ImgDetMain&o=7&rm=3",
+                  label: "Engagement Decoration",
+                  category: "engagement-decoration"
+                },
+                {
+                  img: "https://th.bing.com/th/id/OIP.rbmmHX1YcX_1aNspE9Rr9wHaHq?w=187&h=194&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3",
+                  label: "Baby Shower Decoration",
+                  category: "baby-shower-decoration"
+                },
+                {
+                  img: "https://th.bing.com/th/id/OIF.qe1kSWqLCkDwDuAKxw5pXA?w=294&h=180&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3",
+                  label: "Birthday theme Decoration",
+                  category: "birthday-theme-decoration"
+                },
                 {
                   img: "https://th.bing.com/th/id/OIP.VJ6SCTmdlN-M4aoR9YQziAHaHa?o=7rm=3&rs=1&pid=ImgDetMain&o=7&rm=3",
                   label: "Anniversary Decoration",
+                  category: "anniversary-decoration"
                 },
-                { img: "https://th.bing.com/th/id/OIP.vcwq7wQ0FmS3gSnKg-jdUAAAAA?w=227&h=209&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3", label: "Naming Ceremony" },
-                { img: "https://th.bing.com/th/id/OIP.Hhq-W3iaDkuHZs4vVqbmCQHaJQ?w=138&h=180&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3", label: "Car Decoration" },
-                { img: "https://th.bing.com/th/id/OIP.bMdF1nRtOS9_gCe_QxeBnAHaE8?w=235&h=180&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3", label: "Surprise Decoration" },
-                { img: "https://th.bing.com/th/id/OIP.lPF2NDkfSC5Ke5mit0ZHRAHaE7?w=266&h=180&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3", label: "Room Decoration" },
-                 { img: "https://th.bing.com/th/id/OIP.mGTlfWxRbfHq5qP3DnNVSgHaHa?w=164&h=180&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3", label: "Annaprashan Decoration" },
-                  { img: "https://th.bing.com/th/id/OIP.yewiWDAPFqJr0tyCFxbjzgHaE8?w=266&h=180&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3", label: "Birthday baby Entry" },
-               
+                {
+                  img: "https://th.bing.com/th/id/OIP.vcwq7wQ0FmS3gSnKg-jdUAAAAA?w=227&h=209&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3",
+                  label: "Naming Ceremony",
+                  category: "naming-ceremony"
+                },
+                {
+                  img: "https://th.bing.com/th/id/OIP.Hhq-W3iaDkuHZs4vVqbmCQHaJQ?w=138&h=180&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3",
+                  label: "Car Decoration",
+                  category: "car-decoration"
+                },
+                {
+                  img: "https://th.bing.com/th/id/OIP.bMdF1nRtOS9_gCe_QxeBnAHaE8?w=235&h=180&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3",
+                  label: "Surprise Decoration",
+                  category: "surprise-decoration"
+                },
+                {
+                  img: "https://th.bing.com/th/id/OIP.lPF2NDkfSC5Ke5mit0ZHRAHaE7?w=266&h=180&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3",
+                  label: "Room Decoration",
+                  category: "room-decoration"
+                },
+                {
+                  img: "https://th.bing.com/th/id/OIP.mGTlfWxRbfHq5qP3DnNVSgHaHa?w=164&h=180&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3",
+                  label: "Annaprashan Decoration",
+                  category: "annaprashan-decoration"
+                },
+                {
+                  img: "https://th.bing.com/th/id/OIP.yewiWDAPFqJr0tyCFxbjzgHaE8?w=266&h=180&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3",
+                  label: "Birthday baby Entry",
+                  category: "birthday-baby-entry"
+                },
               ].map((item, idx) => (
                 <div
                   key={idx}
@@ -535,21 +539,47 @@ function MainPage() {
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
               {/* Example categories, replace with your actual data if needed */}
               {[
-                { img: "https://th.bing.com/th/id/OIP.rbmmHX1YcX_1aNspE9Rr9wHaHq?w=187&h=194&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3", label: "Baby shower Decoration" },
-                { img: "haldi-decoration.jpg", label: "Welcome Baby Decoration" },
-                { img: "mehndi-decoration.jpg", label: "Birthday Theme Decoration" },
-                { img: "flowers-jewels.jpg", label: "Anniversary Decoration" },
+                {
+                  img: "https://th.bing.com/th/id/OIP.rbmmHX1YcX_1aNspE9Rr9wHaHq?w=187&h=194&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3",
+                  label: "Baby shower Decoration",
+                  category: "baby-shower-decoration"
+                },
+                {
+                  img: "haldi-decoration.jpg",
+                  label: "Welcome Baby Decoration",
+                  category: "welcome-baby-decoration"
+                },
+                {
+                  img: "mehndi-decoration.jpg",
+                  label: "Birthday Theme Decoration",
+                  category:"birthday-theme-decoration"
+                },
+                { img: "flowers-jewels.jpg", label: "Anniversary Decoration", 
+                  category:"anniversary-decoration"
+                },
                 {
                   img: "luxury-car-decoration.jpg",
                   label: "Naming Ceremony",
+                  category: "naming-ceremony"
+                  
                 },
-                { img: "varmala-garlands.jpg", label: "Car Decoration" },
+                { img: "varmala-garlands.jpg", label: "Car Decoration", 
+                  category: "car-decoration"
+                 },
                 {
                   img: "wedding-bridal-entry.jpg",
                   label: "Annaprashan Decoration",
+                  category: "annaprashan-decoration"
+
                 },
-                { img: "phool-ki-chadar.jpg", label: "Room Decoration" },
-                { img: "balloons-decor-wedding.jpg", label: "Baby Entry Decoration" },
+                { img: "phool-ki-chadar.jpg", label: "Room Decoration" ,
+                  category:"room-decoration"
+                },
+                {
+                  img: "balloons-decor-wedding.jpg",
+                  label: "Baby Entry Decoration",
+                  category: "baby-entry-decoration"
+                },
               ].map((item, idx) => (
                 <div
                   key={idx}
@@ -584,23 +614,43 @@ function MainPage() {
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
               {/* Example categories, replace with your actual data if needed */}
               {[
-                { img: "house-decoration.jpg", label: "House Decoration" },
-                { img: "haldi-decoration.jpg", label: "Haldi Decoration" },
-                { img: "mehndi-decoration.jpg", label: "Mehndi Decoration" },
-                { img: "flowers-jewels.jpg", label: "Flowers Jewelr" },
+                { img: "house-decoration.jpg", label: "House Decoration",
+                  category: "house-decoration"
+                },
+                {
+                  img: "haldi-decoration.jpg",
+                  label: "Haldi & Mehendi Decoration",
+                  category: "haldi-mehendi-decoration"
+                },
+                { img: "mehndi-decoration.jpg", label: "Flower Decoration",
+                  category: "flower-decoration"
+                 },
+                { img: "flowers-jewels.jpg", label: "FireWorks" ,
+                  category: "fireworks"
+                },
                 {
                   img: "luxury-car-decoration.jpg",
-                  label: "Luxury Car Decoration",
+                  label: "Mandap Decoration",
+                  category:"mandap-decoration"
                 },
-                { img: "varmala-garlands.jpg", label: "Varmala Garlands" },
-                { img: "artificial-varmala.jpg", label: "Artificial Varmala" },
+                { img: "varmala-garlands.jpg", label: "Bride & Groom Entry",
+                  category: "bride-groom-entry"
+                 },
+                { img: "artificial-varmala.jpg", label: "Stage Varmala theme",
+                  category: "stage-varmala-theme"
+                 },
                 {
                   img: "wedding-bridal-entry.jpg",
-                  label: "Wedding Bridal Entry",
+                  label: "Engagement Decoration",
                 },
-                { img: "phool-ki-chadar.jpg", label: "Phool Ki Chadar" },
-                { img: "balloons-decor-wedding.jpg", label: "Balloons Decor" },
-                { img: "room-decoration.jpg", label: "Room Decoration" },
+                { img: "phool-ki-chadar.jpg", label: "Room Decoration",
+                  category: "room-decoration"
+                },
+                {
+                  img: "balloons-decor-wedding.jpg",
+                  label: "Bride Welcome Home",
+                  category:"bride-welcome"
+                },
               ].map((item, idx) => (
                 <div
                   key={idx}
@@ -965,27 +1015,19 @@ function MainPage() {
               className="max-w-lg mx-auto space-y-6"
             >
               <div>
-                <select
-                  name="category"
-                  value={adminForm.category}
-                  onChange={handleAdminInputChange}
-                  required
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent"
-                >
-                  <option value="hero">Hero Images</option>
-                  <option value="welcome_baby">Welcome Baby Event</option>
-                  <option value="haldi_mehendi">Haldi Mehendi</option>
-                  <option value="bride_groom_entry">
-                    Bride & Groom Entry Setup
-                  </option>
-                  <option value="theme_birthday">
-                    Theme Birthday Decoration
-                  </option>
-                  <option value="anniversary">Anniversary Decoration</option>
-                  <option value="firework">Firework Decoration</option>
-                  <option value="flower_decoration">Flower Decoration</option>
-                  <option value="baby_shower">Baby Shower Decoration</option>
-                </select>
+              <select
+  name="category"
+  value={adminForm.category}
+  onChange={handleAdminInputChange}
+  required
+  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent"
+>
+  {categoryData.map((cat) => (
+    <option key={cat.category} value={cat.category}>
+      {cat.title}
+    </option>
+  ))}
+</select>
               </div>
               <div>
                 <input

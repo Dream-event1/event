@@ -13,7 +13,8 @@ function CategoryPage() {
 
   // Fetch category and images
   useEffect(() => {
-    const category = localStorage.getItem("selectedCategory");
+    const category = localStorage.getItem("SelectedCategory");
+    console.log(category);
     if (!category) {
       setError("No category selected");
       setLoading(false);
