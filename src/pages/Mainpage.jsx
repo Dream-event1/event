@@ -160,7 +160,7 @@ function MainPage() {
       `New Inquiry:\nName: ${name}\nEmail: ${email}\nPhone: ${phone}\nEvent: ${eventType}\nMessage: ${message}`
     );
     // Open WhatsApp chat with pre-filled message
-    window.open(`https://wa.me/8319200863?text=${text}`, "_blank");
+    window.open(`https://wa.me/+91 8319200863?text=${text}`, "_blank");
 
     setFormData({ name: "", email: "", phone: "", eventType: "", message: "" });
   };
@@ -459,130 +459,121 @@ function MainPage() {
           </div>
         </section>
 
-        {/* Gallery Section */}
-        <section id="gallery" className="py-20 px-4 bg-white">
-          <div className="max-w-7xl mx-auto">
-            <div className="text-center mb-16">
-              <h2 className="text-4xl font-bold text-gray-800 mb-4">
-                Our Gallery
-              </h2>
-              <p className="text-xl text-gray-600">
-                Explore our beautiful work by category
-              </p>
-            </div>
-
-            <div className="space-y-16">
-              {services.map((service, serviceIndex) => (
-                <div
-                  key={serviceIndex}
-                  className="bg-gradient-to-br from-pink-50 to-purple-50 rounded-3xl p-8"
-                >
-                  <div className="text-center mb-8">
-                    <div className="text-5xl mb-4">{service.icon}</div>
-                    <h3 className="text-3xl font-bold text-gray-800 mb-2">
-                      {service.title}
-                    </h3>
-                    <p className="text-lg text-gray-600">
-                      {service.description}
-                    </p>
-                  </div>
-
-                  <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
-                    {service.imageUrls
-                      .slice(0, visibleImageCounts[serviceIndex] || 4)
-                      .map((image, index) => (
-                        <div
-                          key={index}
-                          className="relative overflow-hidden rounded-lg group cursor-pointer"
-                          onClick={() => handleImageClick(image)}
-                        >
-                          <img
-                            src={image}
-                            alt={`${service.title} ${index + 1}`}
-                            className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-300"
-                          />
-                          <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors"></div>
-                        </div>
-                      ))}
-                  </div>
-
-                  {(service.imageUrls.length > 4 ||
-                    (visibleImageCounts[serviceIndex] || 4) > 4) && (
-                    <div className="text-center flex justify-center space-x-4">
-                      {service.imageUrls.length >
-                        (visibleImageCounts[serviceIndex] || 4) && (
-                        <button
-                          onClick={() => handleShowMore(serviceIndex)}
-                          className="bg-pink-600 hover:bg-pink-700 text-white px-8 py-3 rounded-full font-semibold transition-colors"
-                        >
-                          Show More
-                        </button>
-                      )}
-                      {(visibleImageCounts[serviceIndex] || 4) > 4 && (
-                        <button
-                          onClick={() => handleShowLess(serviceIndex)}
-                          className="bg-pink-600 hover:bg-pink-700 text-white px-8 py-3 rounded-full font-semibold transition-colors"
-                        >
-                          Show Less
-                        </button>
-                      )}
-                    </div>
-                  )}
-                </div>
-              ))}
-            </div>
+        {/* Choose By Gifts Category Section */}
+      <section id="gallery" className="py-20 px-4 bg-white">
+  <div className="max-w-7xl mx-auto">
+    <div className="text-center mb-16">
+      <h2 className="text-4xl font-bold text-gray-800 mb-4">
+        Our All Services
+      </h2>
+    </div>
+    <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-6">
+      {[
+        { img: "wedding-items.jpg", label: "Weddings Items" },
+        { img: "gifts-items.jpg", label: "Gifts Items" },
+        { img: "flowers-bouquet.jpg", label: "Flowers Bouquet" },
+        { img: "chocolates-bouquets.jpg", label: "Chocolates Bouquets" },
+        { img: "cakes.jpg", label: "Cakes" },
+        { img: "fresh-sweets.jpg", label: "Fresh Sweets" },
+        { img: "combo-offers.jpg", label: "Combo Offers" },
+        { img: "hampers.jpg", label: "Hampers" },
+        { img: "balloons-decor.jpg", label: "Balloons Decor" },
+        { img: "fresh-fruits-basket.jpg", label: "Fresh Fruits Basket" },
+        { img: "personalised-mugs.jpg", label: "Personalised Mugs" },
+      ].map((item, idx) => (
+        <div key={idx} className="flex flex-col items-center space-y-2">
+          <div className="w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 rounded-full overflow-hidden shadow-lg border-4 border-pink-200 flex items-center justify-center bg-white">
+            <img
+              src={item.img}
+              alt={item.label}
+              className="w-full h-full object-cover"
+            />
           </div>
-        </section>
+          <span className="text-gray-800 font-bold text-center mt-2 text-xs sm:text-sm md:text-base">{item.label}</span>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
 
-        {/* Services Section */}
-        <section id="services" className="py-20 px-4">
-          <div className="max-w-7xl mx-auto">
-            <div className="text-center mb-16">
-              <h2 className="text-4xl font-bold text-gray-800 mb-4">
-                Our Services
-              </h2>
-              <p className="text-xl text-gray-600">
-                We specialize in creating memorable events for every occasion
-              </p>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {services.map((service, index) => (
-                <div
-                  key={index}
-                  className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow"
-                >
-                  <div className="p-6">
-                    <div className="text-4xl mb-4">{service.icon}</div>
-                    <h3 className="text-xl font-bold text-gray-800 mb-3">
-                      {service.title}
-                    </h3>
-                    <p className="text-gray-600 mb-4">{service.description}</p>
-
-                    <div className="grid grid-cols-2 gap-2 mb-4">
-                      {service.imageUrls.slice(0, 2).map((img, imgIndex) => (
-                        <img
-                          key={imgIndex}
-                          src={img}
-                          alt={`${service.title} ${imgIndex + 1}`}
-                          className="w-full h-20 object-cover rounded-lg"
-                        />
-                      ))}
-                    </div>
-
-                    <button
-                      onClick={() => handleExploreClick(service.category)}
-                      className="w-full bg-pink-100 hover:bg-pink-200 text-pink-700 py-2 px-4 rounded-lg font-semibold transition-colors"
-                    >
-                      Explore More Images
-                    </button>
-                  </div>
-                </div>
-              ))}
-            </div>
+       
+       {/* Choose By Wedding Category Section */}
+<section id="services" className="py-20 px-4 bg-white">
+  <div className="max-w-7xl mx-auto">
+    <div className="text-center mb-16">
+      <h2 className="text-4xl font-bold text-gray-800 mb-4">
+        Our Balloon Decoration Services
+      </h2>
+    </div>
+    <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+      {/* Example categories, replace with your actual data if needed */}
+      {[
+        { img: "house-decoration.jpg", label: "House Decoration" },
+        { img: "haldi-decoration.jpg", label: "Haldi Decoration" },
+        { img: "mehndi-decoration.jpg", label: "Mehndi Decoration" },
+        { img: "flowers-jewels.jpg", label: "Flowers Jewelr" },
+        { img: "luxury-car-decoration.jpg", label: "Luxury Car Decoration" },
+        { img: "varmala-garlands.jpg", label: "Varmala Garlands" },
+        { img: "artificial-varmala.jpg", label: "Artificial Varmala" },
+        { img: "wedding-bridal-entry.jpg", label: "Wedding Bridal Entry" },
+        { img: "phool-ki-chadar.jpg", label: "Phool Ki Chadar" },
+        { img: "balloons-decor-wedding.jpg", label: "Balloons Decor" },
+        { img: "room-decoration.jpg", label: "Room Decoration" },
+      ].map((item, idx) => (
+        <div key={idx} className="flex flex-col items-center space-y-2">
+          <div className="w-32 h-32 rounded-full overflow-hidden shadow-lg border-4 border-pink-200 flex items-center justify-center bg-white">
+            <img
+              src={item.img}
+              alt={item.label}
+              className="w-full h-full object-cover"
+            />
           </div>
-        </section>
+          <span className="text-gray-800 font-bold text-center mt-2">{item.label}</span>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
 
+
+   {/* our balloon section */}
+
+<section id="services" className="py-20 px-4 bg-white">
+  <div className="max-w-7xl mx-auto">
+    <div className="text-center mb-16">
+      <h2 className="text-4xl font-bold text-gray-800 mb-4">
+        Choose By Wedding Services
+      </h2>
+    </div>
+    <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+      {/* Example categories, replace with your actual data if needed */}
+      {[
+        { img: "house-decoration.jpg", label: "House Decoration" },
+        { img: "haldi-decoration.jpg", label: "Haldi Decoration" },
+        { img: "mehndi-decoration.jpg", label: "Mehndi Decoration" },
+        { img: "flowers-jewels.jpg", label: "Flowers Jewelr" },
+        { img: "luxury-car-decoration.jpg", label: "Luxury Car Decoration" },
+        { img: "varmala-garlands.jpg", label: "Varmala Garlands" },
+        { img: "artificial-varmala.jpg", label: "Artificial Varmala" },
+        { img: "wedding-bridal-entry.jpg", label: "Wedding Bridal Entry" },
+        { img: "phool-ki-chadar.jpg", label: "Phool Ki Chadar" },
+        { img: "balloons-decor-wedding.jpg", label: "Balloons Decor" },
+        { img: "room-decoration.jpg", label: "Room Decoration" },
+      ].map((item, idx) => (
+        <div key={idx} className="flex flex-col items-center space-y-2">
+          <div className="w-32 h-32 rounded-full overflow-hidden shadow-lg border-4 border-pink-200 flex items-center justify-center bg-white">
+            <img
+              src={item.img}
+              alt={item.label}
+              className="w-full h-full object-cover"
+            />
+          </div>
+          <span className="text-gray-800 font-bold text-center mt-2">{item.label}</span>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
         {/* Offers Section */}
         {/* <section
         id="offers"
@@ -650,388 +641,380 @@ function MainPage() {
         </div>
       </section> */}
 
-
-
-
-{/* Our works */}
-
-
-<section id="services-offered" className="py-10 px-4 bg-white">
-  <div className="max-w-7xl mx-auto">
-    <div className="mb-8">
-      <h2 className="text-2xl font-semibold text-white bg-red-500 p-4 rounded-t-lg">We Deal With</h2>
-      <div className="border border-gray-200 p-4 rounded-b-lg">
-        <ul className="space-y-2">
-          <li className="text-gray-800 font-bold">→ Theme Based Balloon Decoration</li>
-          <li className="text-gray-800 font-bold">→ Flower Decoration</li>
-          <li className="text-gray-800 font-bold">→ Haldi and Mehendi</li>
-          <li className="text-gray-800 font-bold">→ Stage Decoration</li>
-          <li className="text-gray-800 font-bold">→ Cold Pyro Entry</li>
-          <li className="text-gray-800 font-bold">→ Dry Ice Fog Entry</li>
-          <li className="text-gray-800 font-bold">→ Paper Blast Entry</li>
-          <li className="text-gray-800 font-bold">→ Balloon Blast Entry</li>
-          <li className="text-gray-800 font-bold">→ Bride Groom Entry</li>
-          <li className="text-gray-800 font-bold">→ Wedding Firework</li>
-        </ul>
-      </div>
-    </div>
-    <div>
-      <h2 className="text-2xl font-semibold text-white bg-red-600 p-4 rounded-t-lg">We Are Available For</h2>
-      <div className="border border-gray-200 p-4 rounded-b-lg">
-        <ul className="space-y-2">
-          <li className="text-gray-800 font-bold">→ Birthday</li>
-          <li className="text-gray-800 font-bold">→ Ring Ceremony</li>
-          <li className="text-gray-800 font-bold">→ Wedding Ceremony</li>
-          <li className="text-gray-800 font-bold">→ Naming Ceremony</li>
-          <li className="text-gray-800 font-bold">→ Cultural Event</li>
-          <li className="text-gray-800 font-bold">→ Get Together</li>
-          <li className="text-gray-800 font-bold">→ Anniversary</li>
-          <li className="text-gray-800 font-bold">→ School Function</li>
-          <li className="text-gray-800 font-bold">→ Pooja/Grih Pravesh</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</section>
-
-        {/* Testimonial section */}
-
-
-
-        <section id="testimonials" className="py-20 px-4 bg-white">
-          <div className="max-w-7xl mx-auto">
-            <div className="text-center mb-16">
-              <h2 className="text-4xl font-bold text-gray-800 mb-4">
-                What Our Clients Say
-              </h2>
-              <p className="text-xl text-gray-600">
-                Hear from those who’ve celebrated with us
-              </p>
+      {/* Our works */}
+      <section id="services-offered" className="py-10 px-4 bg-white">
+        <div className="max-w-7xl mx-auto">
+          <div className="mb-8">
+            <h2 className="text-2xl font-semibold text-white bg-red-500 p-4 rounded-t-lg">We Deal With</h2>
+            <div className="border border-gray-200 p-4 rounded-b-lg">
+              <ul className="space-y-2">
+                <li className="text-gray-800 font-bold">→ Theme Based Balloon Decoration</li>
+                <li className="text-gray-800 font-bold">→ Flower Decoration</li>
+                <li className="text-gray-800 font-bold">→ Haldi and Mehendi</li>
+                <li className="text-gray-800 font-bold">→ Stage Decoration</li>
+                <li className="text-gray-800 font-bold">→ Cold Pyro Entry</li>
+                <li className="text-gray-800 font-bold">→ Dry Ice Fog Entry</li>
+                <li className="text-gray-800 font-bold">→ Paper Blast Entry</li>
+                <li className="text-gray-800 font-bold">→ Balloon Blast Entry</li>
+                <li className="text-gray-800 font-bold">→ Bride Groom Entry</li>
+                <li className="text-gray-800 font-bold">→ Wedding Firework</li>
+              </ul>
             </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-          
-              {/* Previous feedback cards */}
-              {[
-                {
-                  name: "Priyansh Sharma",
-                  testimonial:
-                    "Dream Event made our baby’s welcome party magical! The decorations were perfect, and their team was so professional.",
-                  image:
-                    "https://th.bing.com/th/id/OIP.nZeXcxr8dxowYfGxoZ99jAHaFd?w=259&h=190&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3/150",
-                },
-                {
-                  name: "Rahul Verma",
-                  testimonial:
-                    "Our wedding entry setup was breathtaking. Dream Event turned our vision into reality with such elegance!",
-                  image:
-                    "https://th.bing.com/th/id/OIP.hCfHyL8u8XAbreXuaiTMQgHaHZ?w=194&h=193&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3/150",
-                },
-                {
-                  name: "Ankit Desai",
-                  testimonial:
-                    "The themed birthday party for my daughter was a hit! The kids loved it, and the photos are stunning.",
-                  image:
-                    "https://th.bing.com/th/id/OIP.jwoZHKQLy5h-DT7a5EYBVQHaJQ?w=164&h=205&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3/150",
-                },
-                {
-                  name: "Suresh Kumar",
-                  testimonial:
-                    "Dream Event organized our anniversary celebration flawlessly. The flower decorations were beautiful and the service was top-notch.",
-                  image:
-                    "https://th.bing.com/th/id/OIP.LC5QeewTlOYRlb0-6cg4vAHaNK?w=115&h=181&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3/150",
-                },
-                {
-                  name: "Manish Singh",
-                  testimonial:
-                    "I can’t thank Dream Event enough for the amazing firework decoration at our event. It was truly a night to remember!",
-                  image:
-                    "https://th.bing.com/th/id/OIP.7jv8nJxT-423383lL9ew8QHaLH?w=129&h=193&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3/150",
-                },
-              ].map((client, index) => (
-                <div
-                  key={index}
-                  className="bg-gradient-to-br from-pink-50 to-purple-50 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-shadow text-center"
-                >
-                  <img
-                    src={client.image}
-                    alt={client.name}
-                    className="w-20 h-20 rounded-full mx-auto mb-4 object-cover border-2 border-pink-600"
-                  />
-                  <p className="text-gray-600 italic mb-4">
-                    "{client.testimonial}"
-                  </p>
-                  <h4 className="text-lg font-semibold text-gray-800">
-                    {client.name}
-                  </h4>
-                </div>
-              ))}
+          </div>
+          <div>
+            <h2 className="text-2xl font-semibold text-white bg-red-600 p-4 rounded-t-lg">We Are Available For</h2>
+            <div className="border border-gray-200 p-4 rounded-b-lg">
+              <ul className="space-y-2">
+                <li className="text-gray-800 font-bold">→ Birthday</li>
+                <li className="text-gray-800 font-bold">→ Ring Ceremony</li>
+                <li className="text-gray-800 font-bold">→ Wedding Ceremony</li>
+                <li className="text-gray-800 font-bold">→ Naming Ceremony</li>
+                <li className="text-gray-800 font-bold">→ Cultural Event</li>
+                <li className="text-gray-800 font-bold">→ Get Together</li>
+                <li className="text-gray-800 font-bold">→ Anniversary</li>
+                <li className="text-gray-800 font-bold">→ School Function</li>
+                <li className="text-gray-800 font-bold">→ Pooja/Grih Pravesh</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Testimonial section */}
+      <section id="testimonials" className="py-20 px-4 bg-white">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold text-gray-800 mb-4">
+              What Our Clients Say
+            </h2>
+            <p className="text-xl text-gray-600">
+              Hear from those who’ve celebrated with us
+            </p>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        
+            {/* Previous feedback cards */}
+            {[
+              {
+                name: "Priyansh Sharma",
+                testimonial:
+                  "Dream Event made our baby’s welcome party magical! The decorations were perfect, and their team was so professional.",
+                image:
+                  "https://th.bing.com/th/id/OIP.nZeXcxr8dxowYfGxoZ99jAHaFd?w=259&h=190&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3/150",
+              },
+              {
+                name: "Rahul Verma",
+                testimonial:
+                  "Our wedding entry setup was breathtaking. Dream Event turned our vision into reality with such elegance!",
+                image:
+                  "https://th.bing.com/th/id/OIP.hCfHyL8u8XAbreXuaiTMQgHaHZ?w=194&h=193&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3/150",
+              },
+              {
+                name: "Ankit Desai",
+                testimonial:
+                  "The themed birthday party for my daughter was a hit! The kids loved it, and the photos are stunning.",
+                image:
+                  "https://th.bing.com/th/id/OIP.jwoZHKQLy5h-DT7a5EYBVQHaJQ?w=164&h=205&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3/150",
+              },
+              {
+                name: "Suresh Kumar",
+                testimonial:
+                  "Dream Event organized our anniversary celebration flawlessly. The flower decorations were beautiful and the service was top-notch.",
+                image:
+                  "https://th.bing.com/th/id/OIP.LC5QeewTlOYRlb0-6cg4vAHaNK?w=115&h=181&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3/150",
+              },
+              {
+                name: "Manish Singh",
+                testimonial:
+                  "I can’t thank Dream Event enough for the amazing firework decoration at our event. It was truly a night to remember!",
+                image:
+                  "https://th.bing.com/th/id/OIP.7jv8nJxT-423383lL9ew8QHaLH?w=129&h=193&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3/150",
+              },
+            ].map((client, index) => (
+              <div
+                key={index}
+                className="bg-gradient-to-br from-pink-50 to-purple-50 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-shadow text-center"
+              >
+                <img
+                  src={client.image}
+                  alt={client.name}
+                  className="w-20 h-20 rounded-full mx-auto mb-4 object-cover border-2 border-pink-600"
+                />
+                <p className="text-gray-600 italic mb-4">
+                  "{client.testimonial}"
+                </p>
+                <h4 className="text-lg font-semibold text-gray-800">
+                  {client.name}
+                </h4>
+              </div>
+            ))}
 
     {/* Google Reviews Card */}
-              <div className="bg-gradient-to-br from-pink-50 to-purple-50 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-shadow text-center flex flex-col items-center justify-center">
-                <i className="fab fa-google text-5xl text-[#fc3838] mb-4"></i>
-                <p className="text-gray-800 font-bold text-lg mb-2">
-                  100+ Client Reviews on Google
-                </p>
-                <a
-                  href="https://maps.app.goo.gl/3roLBjgaBZoTKqfZA"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-blue-600 hover:underline font-semibold"
-                >
-                  See all reviews on Google
-                </a>
-              </div>
+            <div className="bg-gradient-to-br from-pink-50 to-purple-50 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-shadow text-center flex flex-col items-center justify-center">
+              <i className="fab fa-google text-5xl text-[#fc3838] mb-4"></i>
+              <p className="text-gray-800 font-bold text-lg mb-2">
+                100+ Client Reviews on Google
+              </p>
+              <a
+                href="https://maps.app.goo.gl/3roLBjgaBZoTKqfZA"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-blue-600 hover:underline font-semibold"
+              >
+                See all reviews on Google
+              </a>
             </div>
           </div>
-        </section>
+        </div>
+      </section>
 
-        {/* Contact Section */}
-        <section id="contact" className="py-20 px-4 bg-white">
-          <div className="max-w-7xl mx-auto">
-            <div className="text-center mb-16">
-              <h2 className="text-4xl font-bold text-gray-800 mb-4">
-                Contact Us
-              </h2>
-              <p className="text-xl text-gray-600">
-                Let's plan your perfect event together
-              </p>
-            </div>
+      {/* Contact Section */}
+      <section id="contact" className="py-20 px-4 bg-white">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold text-gray-800 mb-4">
+              Contact Us
+            </h2>
+            <p className="text-xl text-gray-600">
+              Let's plan your perfect event together
+            </p>
+          </div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-              <div>
-                <h3 className="text-2xl font-bold text-gray-800 mb-6">
-                  Get In Touch
-                </h3>
-                <div className="space-y-4">
-                  <div className="flex items-center">
-                    <i className="fas fa-phone text-pink-600 text-xl w-8"></i>
-                    <span className="text-gray-700">+91 8319200863</span>
-                  </div>
-                  <div className="flex items-center">
-                    <i className="fas fa-envelope text-pink-600 text-xl w-8"></i>
-                    <span className="text-gray-700">
-                      satishkhare88@gmail.com
-                    </span>
-                  </div>
-                  <div className="flex items-center">
-                    <i className="fas fa-map-marker-alt text-pink-600 text-xl w-8"></i>
-                    <span className="text-gray-700">
-                      Supela, Bhilai,Chhattisgarh, India
-                    </span>
-                  </div>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+            <div>
+              <h3 className="text-2xl font-bold text-gray-800 mb-6">
+                Get In Touch
+              </h3>
+              <div className="space-y-4">
+                <div className="flex items-center">
+                  <i className="fas fa-phone text-pink-600 text-xl w-8"></i>
+                  <span className="text-gray-700">+91 8319200863</span>
+                </div>
+                <div className="flex items-center">
+                  <i className="fas fa-envelope text-pink-600 text-xl w-8"></i>
+                  <span className="text-gray-700">
+                    satishkhare88@gmail.com
+                  </span>
+                </div>
+                <div className="flex items-center">
+                  <i className="fas fa-map-marker-alt text-pink-600 text-xl w-8"></i>
+                  <span className="text-gray-700">
+                    Supela, Bhilai,Chhattisgarh, India
+                  </span>
                 </div>
               </div>
-
-              <form onSubmit={handleFormSubmit} className="space-y-6">
-                <div>
-                  <input
-                    type="text"
-                    name="name"
-                    placeholder="Your Name"
-                    value={formData.name}
-                    onChange={handleInputChange}
-                    required
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent"
-                  />
-                </div>
-                <div>
-                  <input
-                    type="email"
-                    name="email"
-                    placeholder="Your Email"
-                    value={formData.email}
-                    onChange={handleInputChange}
-                    required
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent"
-                  />
-                </div>
-                <div>
-                  <input
-                    type="tel"
-                    name="phone"
-                    placeholder="Your Phone"
-                    value={formData.phone}
-                    onChange={handleInputChange}
-                    required
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent"
-                  />
-                </div>
-                <div>
-                  <select
-                    name="eventType"
-                    value={formData.eventType}
-                    onChange={handleInputChange}
-                    required
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent"
-                  >
-                    <option value="">Select Event Type</option>
-                    {services.map((service, index) => (
-                      <option key={index} value={service.title}>
-                        {service.title}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-                <div>
-                  <textarea
-                    name="message"
-                    placeholder="Your Message"
-                    value={formData.message}
-                    onChange={handleInputChange}
-                    rows="4"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent"
-                  />
-                </div>
-                <button
-                  type="submit"
-                  className="w-full bg-pink-600 hover:bg-pink-700 text-white py-3 px-6 rounded-lg font-semibold transition-colors"
-                >
-                  Send Message
-                </button>
-              </form>
             </div>
-          </div>
-        </section>
 
-        {/* Admin Section */}
-        <section id="admin" className="py-20 px-4 bg-white">
-          <div className="max-w-7xl mx-auto">
-            <div className="text-center mb-16">
-              <h2 className="text-4xl font-bold text-gray-800 mb-4">
-                Admin: Upload Images
-              </h2>
-              <p className="text-xl text-gray-600">
-                Add new images to a category
-              </p>
-            </div>
-            <form
-              onSubmit={handleAdminSubmit}
-              className="max-w-lg mx-auto space-y-6"
-            >
+            <form onSubmit={handleFormSubmit} className="space-y-6">
               <div>
-                <select
-                  name="category"
-                  value={adminForm.category}
-                  onChange={handleAdminInputChange}
+                <input
+                  type="text"
+                  name="name"
+                  placeholder="Your Name"
+                  value={formData.name}
+                  onChange={handleInputChange}
                   required
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent"
-                >
-                  <option value="hero">Hero Images</option>
-                  <option value="welcome_baby">Welcome Baby Event</option>
-                  <option value="haldi_mehendi">Haldi Mehendi</option>
-                  <option value="bride_groom_entry">
-                    Bride & Groom Entry Setup
-                  </option>
-                  <option value="theme_birthday">
-                    Theme Birthday Decoration
-                  </option>
-                  <option value="anniversary">Anniversary Decoration</option>
-                  <option value="firework">Firework Decoration</option>
-                  <option value="flower_decoration">Flower Decoration</option>
-                  <option value="baby_shower">Baby Shower Decoration</option>
-                </select>
+                />
               </div>
               <div>
                 <input
-                  type="file"
-                  name="images"
-                  onChange={handleFileChange}
-                  multiple
-                  accept="image/jpeg,image/png"
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg"
+                  type="email"
+                  name="email"
+                  placeholder="Your Email"
+                  value={formData.email}
+                  onChange={handleInputChange}
                   required
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent"
+                />
+              </div>
+              <div>
+                <input
+                  type="tel"
+                  name="phone"
+                  placeholder="Your Phone"
+                  value={formData.phone}
+                  onChange={handleInputChange}
+                  required
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent"
+                />
+              </div>
+              <div>
+                <select
+                  name="eventType"
+                  value={formData.eventType}
+                  onChange={handleInputChange}
+                  required
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent"
+                >
+                  <option value="">Select Event Type</option>
+                  {services.map((service, index) => (
+                    <option key={index} value={service.title}>
+                      {service.title}
+                    </option>
+                  ))}
+                </select>
+              </div>
+              <div>
+                <textarea
+                  name="message"
+                  placeholder="Your Message"
+                  value={formData.message}
+                  onChange={handleInputChange}
+                  rows="4"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent"
                 />
               </div>
               <button
                 type="submit"
                 className="w-full bg-pink-600 hover:bg-pink-700 text-white py-3 px-6 rounded-lg font-semibold transition-colors"
               >
-                Upload Images
+                Send Message
               </button>
             </form>
           </div>
-        </section>
+        </div>
+      </section>
 
-        {/* Footer */}
-        <footer className="bg-gray-800 text-white py-12 px-4">
-          <div className="max-w-7xl mx-auto">
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-              <div>
-                <h3 className="text-2xl font-bold mb-4">✨ Dream Event</h3>
-                <p className="text-gray-300">
-                  Creating magical moments and unforgettable experiences for
-                  your special occasions.
-                </p>
-              </div>
-              <div>
-                <h4 className="text-lg font-semibold mb-4">Services</h4>
-                <ul className="space-y-2 text-gray-300">
-                  <li>Wedding Planning</li>
-                  <li>Birthday Parties</li>
-                  <li>Welcome baby Event</li>
-                  <li>Baby Showers</li>
-                  <li>Haldi and mehendi</li>
-                  <li>Bride and groom Entry setup</li>
-                  <li>Firework decoration</li>
-                  <li>Anniversary Celebrations</li>
-                </ul>
-              </div>
-              <div>
-                <h4 className="text-lg font-semibold mb-4">Quick Links</h4>
-                <ul className="space-y-2 text-gray-300">
-                  <li>
-                    <a href="#home" className="hover:text-pink-400">
-                      Home
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#gallery" className="hover:text-pink-400">
-                      Gallery
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#services" className="hover:text-pink-400">
-                      Services
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#contact" className="hover:text-pink-400">
-                      Contact
-                    </a>
-                  </li>
-                </ul>
-              </div>
-              <div>
-                <h4 className="text-lg font-semibold mb-4">Follow Us</h4>
-                <div className="flex space-x-4">
-                  {/* <a href="#" className="text-gray-300 hover:text-pink-400">
-                  <i className="fab fa-facebook text-2xl"></i>
-                </a> */}
-                  <a
-                    href="https://www.instagram.com/dream_events88/"
-                    className="text-gray-300 hover:text-pink-400"
-                  >
-                    <i className="fab fa-instagram text-2xl"></i>
-                  </a>
-                </div>
-              </div>
+      {/* Admin Section */}
+      <section id="admin" className="py-20 px-4 bg-white">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold text-gray-800 mb-4">
+              Admin: Upload Images
+            </h2>
+            <p className="text-xl text-gray-600">
+              Add new images to a category
+            </p>
+          </div>
+          <form
+            onSubmit={handleAdminSubmit}
+            className="max-w-lg mx-auto space-y-6"
+          >
+            <div>
+              <select
+                name="category"
+                value={adminForm.category}
+                onChange={handleAdminInputChange}
+                required
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent"
+              >
+                <option value="hero">Hero Images</option>
+                <option value="welcome_baby">Welcome Baby Event</option>
+                <option value="haldi_mehendi">Haldi Mehendi</option>
+                <option value="bride_groom_entry">
+                  Bride & Groom Entry Setup
+                </option>
+                <option value="theme_birthday">
+                  Theme Birthday Decoration
+                </option>
+                <option value="anniversary">Anniversary Decoration</option>
+                <option value="firework">Firework Decoration</option>
+                <option value="flower_decoration">Flower Decoration</option>
+                <option value="baby_shower">Baby Shower Decoration</option>
+              </select>
             </div>
-            <div className="border-t border-gray-700 mt-8 pt-8 text-center text-gray-300">
-              <p>© 2025 Dream Event. All rights reserved.</p>
+            <div>
+              <input
+                type="file"
+                name="images"
+                onChange={handleFileChange}
+                multiple
+                accept="image/jpeg,image/png"
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg"
+                required
+              />
+            </div>
+            <button
+              type="submit"
+              className="w-full bg-pink-600 hover:bg-pink-700 text-white py-3 px-6 rounded-lg font-semibold transition-colors"
+            >
+              Upload Images
+            </button>
+          </form>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="bg-gray-800 text-white py-12 px-4">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+            <div>
+              <h3 className="text-2xl font-bold mb-4">✨ Dream Event</h3>
+              <p className="text-gray-300">
+                Creating magical moments and unforgettable experiences for
+                your special occasions.
+              </p>
+            </div>
+            <div>
+              <h4 className="text-lg font-semibold mb-4">Services</h4>
+              <ul className="space-y-2 text-gray-300">
+                <li>Wedding Planning</li>
+                <li>Birthday Parties</li>
+                <li>Welcome baby Event</li>
+                <li>Baby Showers</li>
+                <li>Haldi and mehendi</li>
+                <li>Bride and groom Entry setup</li>
+                <li>Firework decoration</li>
+                <li>Anniversary Celebrations</li>
+              </ul>
+            </div>
+            <div>
+              <h4 className="text-lg font-semibold mb-4">Quick Links</h4>
+              <ul className="space-y-2 text-gray-300">
+                <li>
+                  <a href="#home" className="hover:text-pink-400">
+                    Home
+                  </a>
+                </li>
+                <li>
+                  <a href="#gallery" className="hover:text-pink-400">
+                    Gallery
+                  </a>
+                </li>
+                <li>
+                  <a href="#services" className="hover:text-pink-400">
+                    Services
+                  </a>
+                </li>
+                <li>
+                  <a href="#contact" className="hover:text-pink-400">
+                    Contact
+                  </a>
+                </li>
+              </ul>
+            </div>
+            <div>
+              <h4 className="text-lg font-semibold mb-4">Follow Us</h4>
+              <div className="flex space-x-4">
+                {/* <a href="#" className="text-gray-300 hover:text-pink-400">
+                <i className="fab fa-facebook text-2xl"></i>
+              </a> */}
+                <a
+                  href="https://www.instagram.com/dream_events88/"
+                  className="text-gray-300 hover:text-pink-400"
+                >
+                  <i className="fab fa-instagram text-2xl"></i>
+                </a>
+              </div>
             </div>
           </div>
-        </footer>
+          <div className="border-t border-gray-700 mt-8 pt-8 text-center text-gray-300">
+            <p>© 2025 Dream Event. All rights reserved.</p>
+          </div>
+        </div>
+      </footer>
 
-        {/* WhatsApp Button */}
-        <a
-          href="https://wa.me/8319200863"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="fixed bottom-6 right-6 bg-green-500 hover:bg-green-600 text-white p-4 rounded-full shadow-lg transition-colors z-50"
-        >
-          <i className="fab fa-whatsapp text-2xl"></i>
-        </a>
-      </div>
+      {/* WhatsApp Button */}
+      <a
+        href="https://wa.me/8319200863"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="fixed bottom-6 right-6 bg-green-500 hover:bg-green-600 text-white p-4 rounded-full shadow-lg transition-colors z-50"
+      >
+        <i className="fab fa-whatsapp text-2xl"></i>
+      </a>
+    </div>
     </>
   );
 }
