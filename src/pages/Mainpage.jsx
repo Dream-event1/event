@@ -38,7 +38,7 @@ function MainPage() {
 
   const handleAdminKeySubmit = (e) => {
     e.preventDefault();
-    if (adminKey === "12345678") {
+    if (adminKey === "7277") {
       // Replace with your actual key
       setShowAdminModal(false);
       navigate("/admin-panel");
