@@ -4,6 +4,7 @@ import './App.css'
 import MainPage from './pages/Mainpage'
 import CategoryPage from './pages/Category.jsx';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import AdminPanel from './pages/AdminPanel.jsx';
 
 function App() {
 
@@ -13,6 +14,7 @@ function App() {
       <Routes>
         <Route path="/" element={<MainPage />} />
         <Route path="/category" element={<CategoryPage />} />
+         <Route path="/admin-panel" element={<AdminPanel />} />
       </Routes>
     </BrowserRouter>
     </>

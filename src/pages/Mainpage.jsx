@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import categoryData from "./category";
 
 function MainPage() {
@@ -28,9 +28,26 @@ function MainPage() {
   });
   const [selectedImage, setSelectedImage] = React.useState(null);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
+  const [showAdminModal, setShowAdminModal] = React.useState(false);
+  const [adminKey, setAdminKey] = React.useState("");
+
+  const handleAdminPanelClick = (e) => {
+    e.preventDefault();
+    setShowAdminModal(true);
+  };
+
+  const handleAdminKeySubmit = (e) => {
+    e.preventDefault();
+    if (adminKey === "12345678") {
+      // Replace with your actual key
+      setShowAdminModal(false);
+      navigate("/admin-panel");
+    } else {
+      alert("Invalid key!");
+    }
+  };
 
   // Predefined categories to ensure exactly 6 sections
- 
 
   // Fetch images from backend
   // React.useEffect(() => {
@@ -111,7 +128,7 @@ function MainPage() {
       `New Inquiry:\nName: ${name}\nEmail: ${email}\nPhone: ${phone}\nEvent: ${eventType}\nMessage: ${message}`
     );
     // Open WhatsApp chat with pre-filled message
-    window.open(`https://wa.me/+91 8319200863?text=${text}`, "_blank");
+    window.open(`https://wa.me/+918319200863?text=${text}`, "_blank");
 
     setFormData({ name: "", email: "", phone: "", eventType: "", message: "" });
   };
@@ -268,6 +285,39 @@ function MainPage() {
           </div>
         )}
 
+        {/* Admin Modal */}
+        {showAdminModal && (
+  <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+    <div className="bg-white rounded-lg shadow-lg p-8 max-w-sm w-full relative">
+      <button
+        className="absolute top-2 right-2 text-gray-500 hover:text-pink-600"
+        onClick={() => setShowAdminModal(false)}
+      >
+        &times;
+      </button>
+      <h2 className="text-xl font-bold mb-4 text-pink-600">Enter Admin Key</h2>
+      <form onSubmit={handleAdminKeySubmit} className="space-y-4">
+        <input
+          type="password"
+          value={adminKey}
+          onChange={(e) => setAdminKey(e.target.value)}
+          placeholder="Enter key"
+          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500"
+          required
+        />
+        <button
+          type="submit"
+          className="w-full bg-pink-600 hover:bg-pink-700 text-white py-2 rounded-lg font-semibold"
+        >
+          Submit
+        </button>
+      </form>
+    </div>
+  </div>
+        )}        
+
+
+
         {/* Header */}
         <header className="bg-white/90 backdrop-blur-md shadow-sm fixed w-full top-0 z-50">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -285,29 +335,25 @@ function MainPage() {
                   Home
                 </a>
                 <a
-                  href="#gallery"
-                  className="text-gray-700 hover:text-pink-600 transition-colors"
-                >
-                  Gallery
-                </a>
-                <a
                   href="#services"
                   className="text-gray-700 hover:text-pink-600 transition-colors"
                 >
                   Services
                 </a>
-                <a
-                  href="#offers"
-                  className="text-gray-700 hover:text-pink-600 transition-colors"
-                >
-                  Offers
-                </a>
+
                 <a
                   href="#contact"
                   className="text-gray-700 hover:text-pink-600 transition-colors"
                 >
                   Contact
                 </a>
+                <Link
+                  to="#"
+                  className="text-gray-700 font-bold hover:text-pink-600 transition-colors"
+                  onClick={handleAdminPanelClick}
+                >
+                  Admin Panel
+                </Link>
               </nav>
               <div className="md:hidden">
                 <button onClick={toggleMobileMenu} className="text-gray-700">
@@ -333,25 +379,11 @@ function MainPage() {
                     Home
                   </a>
                   <a
-                    href="#gallery"
-                    className="text-gray-700 hover:text-pink-600 transition-colors text-lg font-semibold"
-                    onClick={handleMobileLinkClick}
-                  >
-                    Gallery
-                  </a>
-                  <a
                     href="#services"
                     className="text-gray-700 hover:text-pink-600 transition-colors text-lg font-semibold"
                     onClick={handleMobileLinkClick}
                   >
                     Services
-                  </a>
-                  <a
-                    href="#offers"
-                    className="text-gray-700 hover:text-pink-600 transition-colors text-lg font-semibold"
-                    onClick={handleMobileLinkClick}
-                  >
-                    Offers
                   </a>
                   <a
                     href="#contact"
@@ -360,6 +392,13 @@ function MainPage() {
                   >
                     Contact
                   </a>
+                  <Link
+                    to="#"
+                    className="text-gray-700 font-bold hover:text-pink-600 transition-colors"
+                    onClick={handleAdminPanelClick}
+                  >
+                    Admin Panel
+                  </Link>
                 </nav>
               </div>
             )}
@@ -395,7 +434,7 @@ function MainPage() {
                 Creating magical moments and unforgettable experiences
               </p>
               <a
-                href="https://wa.me/8319200863"
+                href="https://wa.me/+918319200863"
                 className="bg-pink-600 hover:bg-pink-700 text-white px-8 py-4 rounded-full text-lg font-semibold transition-colors"
               >
                 Plan Your Event
@@ -427,84 +466,85 @@ function MainPage() {
             </div>
             <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-6">
               {[
-                { img: "/1001429269.jpg",
-                   label: "House Decoration" ,
-                   category:"house-decoration"
-                  },
+                {
+                  img: "https://th.bing.com/th/id/OIP.hztOlS-5yQNewTHntPtE3gAAAA?w=166&h=180&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3",
+                  label: "House Decoration",
+                  category: "house-decoration",
+                },
                 {
                   img: "https://th.bing.com/th/id/OIP.yK_Dm6YWF_-CgpkAh-fRxwHaHa?w=184&h=185&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3",
                   label: "Haldi & Mehendi",
-                  category: "haldi-mehendi"
+                  category: "haldi-mehendi",
                 },
                 {
                   img: "https://th.bing.com/th/id/OIP.BeHUaZ9nPkfjQInm94pHpgHaE7?w=274&h=182&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3",
                   label: "Flower Decoration",
-                  category: "flower-decoration"
+                  category: "flower-decoration",
                 },
                 {
                   img: "https://th.bing.com/th/id/OIP.bmD21QvgXpnrfK4rW-9BRwHaF9?w=205&h=180&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3",
                   label: "Mandap Decoration",
-                  category: "mandap-decoration"
+                  category: "mandap-decoration",
                 },
                 {
                   img: "https://th.bing.com/th/id/OIP.Bn6SUdmvf9BXeJay_16ZXgHaHJ?w=178&h=180&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3",
                   label: "Bride & Groom entry",
-                  category:"bride-groom-entry"
+                  category: "bride-groom-entry",
                 },
                 {
-                  img: "https://th.bing.com/th/id/OIP.jgB-LXImOOqxWbqaXyRQiQHaE8?w=240&h=180&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3",
+                  img: "https://tse3.mm.bing.net/th/id/OIP.yyZfOEmNvkOGQoRO0gxzMQHaHa?rs=1&pid=ImgDetMain&o=7&rm=3",
                   label: "FireWork",
-                  category: "firework"
+                  category: "firework",
                 },
                 {
                   img: "https://tse2.mm.bing.net/th/id/OIP.VqcPoKcsSEnsM1UacAxhmAAAAA?rs=1&pid=ImgDetMain&o=7&rm=3",
                   label: "Engagement Decoration",
-                  category: "engagement-decoration"
+                  category: "engagement-decoration",
                 },
                 {
                   img: "https://th.bing.com/th/id/OIP.rbmmHX1YcX_1aNspE9Rr9wHaHq?w=187&h=194&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3",
                   label: "Baby Shower Decoration",
-                  category: "baby-shower-decoration"
+                  category: "baby-shower-decoration",
                 },
                 {
                   img: "https://th.bing.com/th/id/OIF.qe1kSWqLCkDwDuAKxw5pXA?w=294&h=180&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3",
                   label: "Birthday theme Decoration",
-                  category: "birthday-theme-decoration"
+                  category: "birthday-theme-decoration",
                 },
                 {
                   img: "https://th.bing.com/th/id/OIP.VJ6SCTmdlN-M4aoR9YQziAHaHa?o=7rm=3&rs=1&pid=ImgDetMain&o=7&rm=3",
                   label: "Anniversary Decoration",
-                  category: "anniversary-decoration"
+                  category: "anniversary-decoration",
                 },
                 {
                   img: "https://th.bing.com/th/id/OIP.vcwq7wQ0FmS3gSnKg-jdUAAAAA?w=227&h=209&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3",
                   label: "Naming Ceremony",
-                  category: "naming-ceremony"
+                  category: "naming-ceremony",
                 },
                 {
                   img: "https://th.bing.com/th/id/OIP.Hhq-W3iaDkuHZs4vVqbmCQHaJQ?w=138&h=180&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3",
                   label: "Car Decoration",
-                  category: "car-decoration"
+                  category: "car-decoration",
                 },
                 {
                   img: "https://th.bing.com/th/id/OIP.bMdF1nRtOS9_gCe_QxeBnAHaE8?w=235&h=180&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3",
                   label: "Surprise Decoration",
-                  category: "surprise-decoration"
+                  category: "surprise-decoration",
                 },
                 {
                   img: "https://th.bing.com/th/id/OIP.lPF2NDkfSC5Ke5mit0ZHRAHaE7?w=266&h=180&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3",
                   label: "Room Decoration",
-                  category: "room-decoration"
+                  category: "room-decoration",
                 },
                 {
                   img: "https://th.bing.com/th/id/OIP.mGTlfWxRbfHq5qP3DnNVSgHaHa?w=164&h=180&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3",
                   label: "Annaprashan Decoration",
-                  category: "annaprashan-decoration"
+                  category: "annaprashan-decoration",
                 },
                 {
                   img: "https://th.bing.com/th/id/OIP.yewiWDAPFqJr0tyCFxbjzgHaE8?w=266&h=180&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3",
                   label: "Birthday baby Entry",
-                  category: "birthday-baby-entry"
+                  category: "birthday-baby-entry",
                 },
               ].map((item, idx) => (
                 <div
@@ -542,43 +582,47 @@ function MainPage() {
                 {
                   img: "https://th.bing.com/th/id/OIP.rbmmHX1YcX_1aNspE9Rr9wHaHq?w=187&h=194&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3",
                   label: "Baby shower Decoration",
-                  category: "baby-shower-decoration"
+                  category: "baby-shower-decoration",
                 },
                 {
-                  img: "haldi-decoration.jpg",
+                  img: "https://th.bing.com/th/id/OIP.mS_xrxBAN-01fQcMikEFVAHaHa?w=173&h=180&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3",
                   label: "Welcome Baby Decoration",
-                  category: "welcome-baby-decoration"
+                  category: "welcome-baby-decoration",
                 },
                 {
-                  img: "mehndi-decoration.jpg",
+                  img: "https://th.bing.com/th/id/OIF.qe1kSWqLCkDwDuAKxw5pXA?w=294&h=180&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3",
                   label: "Birthday Theme Decoration",
-                  category:"birthday-theme-decoration"
-                },
-                { img: "flowers-jewels.jpg", label: "Anniversary Decoration", 
-                  category:"anniversary-decoration"
+                  category: "birthday-theme-decoration",
                 },
                 {
-                  img: "luxury-car-decoration.jpg",
+                  img: "https://th.bing.com/th/id/OIP.VJ6SCTmdlN-M4aoR9YQziAHaHa?o=7rm=3&rs=1&pid=ImgDetMain&o=7&rm=3",
+                  label: "Anniversary Decoration",
+                  category: "anniversary-decoration",
+                },
+                {
+                  img: "https://th.bing.com/th/id/OIP.vcwq7wQ0FmS3gSnKg-jdUAAAAA?w=227&h=209&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3",
                   label: "Naming Ceremony",
-                  category: "naming-ceremony"
-                  
+                  category: "naming-ceremony",
                 },
-                { img: "varmala-garlands.jpg", label: "Car Decoration", 
-                  category: "car-decoration"
-                 },
                 {
-                  img: "wedding-bridal-entry.jpg",
+                  img: "https://th.bing.com/th/id/OIP.Hhq-W3iaDkuHZs4vVqbmCQHaJQ?w=138&h=180&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3",
+                  label: "Car Decoration",
+                  category: "car-decoration",
+                },
+                {
+                  img: "https://th.bing.com/th/id/OIP.mGTlfWxRbfHq5qP3DnNVSgHaHa?w=164&h=180&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3",
                   label: "Annaprashan Decoration",
-                  category: "annaprashan-decoration"
-
-                },
-                { img: "phool-ki-chadar.jpg", label: "Room Decoration" ,
-                  category:"room-decoration"
+                  category: "annaprashan-decoration",
                 },
                 {
-                  img: "balloons-decor-wedding.jpg",
+                  img: "https://th.bing.com/th/id/OIP.lPF2NDkfSC5Ke5mit0ZHRAHaE7?w=266&h=180&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3",
+                  label: "Room Decoration",
+                  category: "room-decoration",
+                },
+                {
+                  img: "https://i.pinimg.com/736x/5d/c4/34/5dc434d0a4ed3dd346f74614fea95130.jpg",
                   label: "Baby Entry Decoration",
-                  category: "baby-entry-decoration"
+                  category: "birthday-baby-entry",
                 },
               ].map((item, idx) => (
                 <div
@@ -614,42 +658,54 @@ function MainPage() {
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
               {/* Example categories, replace with your actual data if needed */}
               {[
-                { img: "house-decoration.jpg", label: "House Decoration",
-                  category: "house-decoration"
+                {
+                  img: "https://th.bing.com/th/id/OIP.hztOlS-5yQNewTHntPtE3gAAAA?w=166&h=180&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3",
+                  label: "House Decoration",
+                  category: "house-decoration",
                 },
                 {
-                  img: "haldi-decoration.jpg",
+                  img: "https://th.bing.com/th/id/OIP.yK_Dm6YWF_-CgpkAh-fRxwHaHa?w=184&h=185&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3",
                   label: "Haldi & Mehendi Decoration",
-                  category: "haldi-mehendi-decoration"
-                },
-                { img: "mehndi-decoration.jpg", label: "Flower Decoration",
-                  category: "flower-decoration"
-                 },
-                { img: "flowers-jewels.jpg", label: "FireWorks" ,
-                  category: "fireworks"
+                  category: "haldi-mehendi-decoration",
                 },
                 {
-                  img: "luxury-car-decoration.jpg",
+                  img: "https://th.bing.com/th/id/OIP.BeHUaZ9nPkfjQInm94pHpgHaE7?w=274&h=182&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3",
+                  label: "Flower Decoration",
+                  category: "flower-decoration",
+                },
+                {
+                  img: "https://tse3.mm.bing.net/th/id/OIP.yyZfOEmNvkOGQoRO0gxzMQHaHa?rs=1&pid=ImgDetMain&o=7&rm=3",
+                  label: "FireWorks",
+                  category: "fireworks",
+                },
+                {
+                  img: "https://th.bing.com/th/id/OIP.bmD21QvgXpnrfK4rW-9BRwHaF9?w=205&h=180&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3",
                   label: "Mandap Decoration",
-                  category:"mandap-decoration"
+                  category: "mandap-decoration",
                 },
-                { img: "varmala-garlands.jpg", label: "Bride & Groom Entry",
-                  category: "bride-groom-entry"
-                 },
-                { img: "artificial-varmala.jpg", label: "Stage Varmala theme",
-                  category: "stage-varmala-theme"
-                 },
                 {
-                  img: "wedding-bridal-entry.jpg",
+                  img: "https://th.bing.com/th/id/OIP.Bn6SUdmvf9BXeJay_16ZXgHaHJ?w=178&h=180&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3",
+                  label: "Bride & Groom Entry",
+                  category: "bride-groom-entry",
+                },
+                {
+                  img: "https://th.bing.com/th/id/OIP.03aqdWrM32sYqDV4tU0S-AHaE8?w=284&h=190&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3",
+                  label: "Stage Varmala theme",
+                  category: "stage-varmala-theme",
+                },
+                {
+                  img: "https://tse2.mm.bing.net/th/id/OIP.VqcPoKcsSEnsM1UacAxhmAAAAA?rs=1&pid=ImgDetMain&o=7&rm=3",
                   label: "Engagement Decoration",
                 },
-                { img: "phool-ki-chadar.jpg", label: "Room Decoration",
-                  category: "room-decoration"
+                {
+                  img: "https://th.bing.com/th/id/OIP.lPF2NDkfSC5Ke5mit0ZHRAHaE7?w=266&h=180&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3",
+                  label: "Room Decoration",
+                  category: "room-decoration",
                 },
                 {
-                  img: "balloons-decor-wedding.jpg",
+                  img: "https://i.pinimg.com/originals/e4/4a/a8/e44aa80a26895ea8da034a0bdc9af854.jpg",
                   label: "Bride Welcome Home",
-                  category:"bride-welcome"
+                  category: "bride-welcome",
                 },
               ].map((item, idx) => (
                 <div
@@ -1000,7 +1056,7 @@ function MainPage() {
         </section>
 
         {/* Admin Section */}
-        <section id="admin" className="py-20 px-4 bg-white">
+        {/* <section id="admin" className="py-20 px-4 bg-white">
           <div className="max-w-7xl mx-auto">
             <div className="text-center mb-16">
               <h2 className="text-4xl font-bold text-gray-800 mb-4">
@@ -1048,7 +1104,7 @@ function MainPage() {
               </button>
             </form>
           </div>
-        </section>
+        </section> */}
 
         {/* Footer */}
         <footer className="bg-gray-800 text-white py-12 px-4">
@@ -1063,16 +1119,6 @@ function MainPage() {
               </div>
               <div>
                 <h4 className="text-lg font-semibold mb-4">Services</h4>
-                <ul className="space-y-2 text-gray-300">
-                  <li>Wedding Planning</li>
-                  <li>Birthday Parties</li>
-                  <li>Welcome baby Event</li>
-                  <li>Baby Showers</li>
-                  <li>Haldi and mehendi</li>
-                  <li>Bride and groom Entry setup</li>
-                  <li>Firework decoration</li>
-                  <li>Anniversary Celebrations</li>
-                </ul>
               </div>
               <div>
                 <h4 className="text-lg font-semibold mb-4">Quick Links</h4>
@@ -1122,7 +1168,7 @@ function MainPage() {
 
         {/* WhatsApp Button */}
         <a
-          href="https://wa.me/8319200863"
+          href="https://wa.me/+918319200863"
           target="_blank"
           rel="noopener noreferrer"
           className="fixed bottom-6 right-6 bg-green-500 hover:bg-green-600 text-white p-4 rounded-full shadow-lg transition-colors z-50"

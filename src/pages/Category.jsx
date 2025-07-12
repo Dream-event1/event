@@ -1,10 +1,10 @@
 "use client";
 import React, { useEffect, useState } from "react";
-// import { useRouter } from "next/router";
+import { Link } from "react-router-dom";
 import categoryData from "./category";
 
 function CategoryPage() {
-//   const router = useRouter();
+  //   const router = useRouter();
   const [categoryInfo, setCategoryInfo] = useState(null);
   const [images, setImages] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -31,7 +31,9 @@ function CategoryPage() {
 
     const fetchImages = async () => {
       try {
-        const response = await fetch("https://event-manager-backend-sj89.onrender.com/api/images");
+        const response = await fetch(
+          "https://event-manager-backend-sj89.onrender.com/api/images"
+        );
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
@@ -108,7 +110,6 @@ function CategoryPage() {
         </div>
       )}
 
-
       {/* Category Content */}
       <section className="pt-24 pb-20 px-4">
         <div className="max-w-7xl mx-auto">
@@ -176,7 +177,7 @@ function CategoryPage() {
               Contact Us
             </a>
             <a
-              href="https://wa.me/8319200863"
+              href="https://wa.me/+918319200863"
               target="_blank"
               rel="noopener noreferrer"
               className="bg-green-500 hover:bg-green-600 text-white px-8 py-3 rounded-full font-semibold transition-colors flex items-center"
@@ -192,23 +193,27 @@ function CategoryPage() {
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             <div>
-              <h3 className="text-2xl font-bold mb-4">✨ V3 Events</h3>
+              <h3 className="text-2xl font-bold mb-4">✨ Dream Event</h3>
               <p className="text-gray-300">
                 Creating magical moments and unforgettable experiences for your
                 special occasions.
               </p>
             </div>
             <div>
-              <h4 className="text-lg font-semibold mb-4">Services</h4>
-              <ul className="space-y-2 text-gray-300">
-                <li>Wedding Planning</li>
-                <li>Birthday Parties</li>
-                <li>Corporate Events</li>
-                <li>Anniversary Celebrations</li>
-              </ul>
+              <h4 className="text-lg font-semibold mb-4"><Link to="/">Service</Link></h4>
             </div>
             <div>
-              <h4 className="text-lg font-semibold mb-4">Quick Links</h4>
+              <h4 className="text-lg font-semibold mb-4">
+                {" "}
+                <a
+                  href="https://wa.me/+918319200863"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className=" text-white  rounded-full font-semibold transition-colors flex items-center"
+                >
+                  Quick Links
+                </a>
+              </h4>
               <ul className="space-y-2 text-gray-300">
                 <li>
                   <a href="/" className="hover:text-pink-400">
@@ -221,11 +226,6 @@ function CategoryPage() {
                   </a>
                 </li>
                 <li>
-                  <a href="/#services" className="hover:text-pink-400">
-                    Services
-                  </a>
-                </li>
-                <li>
                   <a href="/#contact" className="hover:text-pink-400">
                     Contact
                   </a>
@@ -235,27 +235,24 @@ function CategoryPage() {
             <div>
               <h4 className="text-lg font-semibold mb-4">Follow Us</h4>
               <div className="flex space-x-4">
-                <a href="#" className="text-gray-300 hover:text-pink-400">
-                  <i className="fab fa-facebook text-2xl"></i>
-                </a>
-                <a href="#" className="text-gray-300 hover:text-pink-400">
+                <a
+                  href="https://www.instagram.com/dream_events88/"
+                  className="text-gray-300 hover:text-pink-400"
+                >
                   <i className="fab fa-instagram text-2xl"></i>
-                </a>
-                <a href="#" className="text-gray-300 hover:text-pink-400">
-                  <i className="fab fa-twitter text-2xl"></i>
                 </a>
               </div>
             </div>
           </div>
           <div className="border-t border-gray-700 mt-8 pt-8 text-center text-gray-300">
-            <p>© 2025 V3 Events. All rights reserved.</p>
+            <p>© 2025 Dream Events. All rights reserved.</p>
           </div>
         </div>
       </footer>
 
       {/* WhatsApp Button */}
       <a
-        href="https://wa.me/8319200863"
+        href="https://wa.me/+918319200863"
         target="_blank"
         rel="noopener noreferrer"
         className="fixed bottom-6 right-6 bg-green-500 hover:bg-green-600 text-white p-4 rounded-full shadow-lg transition-colors z-50"

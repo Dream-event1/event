@@ -1,15 +1,15 @@
 const categoryData = [
   // Hero Section
-  {
-    category: "hero",
-    title: "Hero Images",
-    description: "Our stunning hero images capture the essence of unforgettable events, showcasing the grandeur and elegance of our event planning expertise.",
-    quotes: [
-      "Every event begins with a vision; let us make yours unforgettable.",
-      "Moments that shine, captured in timeless elegance.",
-      "Where dreams meet reality, your event starts here.",
-    ],
-  },
+  // {
+  //   category: "hero",
+  //   title: "Hero Images",
+  //   description: "Our stunning hero images capture the essence of unforgettable events, showcasing the grandeur and elegance of our event planning expertise.",
+  //   quotes: [
+  //     "Every event begins with a vision; let us make yours unforgettable.",
+  //     "Moments that shine, captured in timeless elegance.",
+  //     "Where dreams meet reality, your event starts here.",
+  //   ],
+  // },
   // All Services Section
   {
     category: "house-decoration",
