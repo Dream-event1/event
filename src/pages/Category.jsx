@@ -32,7 +32,7 @@ function CategoryPage() {
     const fetchImages = async () => {
       try {
         const response = await fetch(
-          "https://event-manager-backend-sj89.onrender.com/api/images"
+          "https://backend-1re7.onrender.com/api/images"
         );
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
