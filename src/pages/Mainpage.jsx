@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
-import categoryData from "./category";
+import category from "./category";
 
 function MainPage() {
   const navigate = useNavigate();
@@ -492,7 +492,7 @@ function MainPage() {
                   category: "bride-groom-entry",
                 },
                 {
-                  img: "https://tse3.mm.bing.net/th/id/OIP.yyZfOEmNvkOGQoRO0gxzMQHaHa?rs=1&pid=ImgDetMain&o=7&rm=3",
+                  img: "/firework.jpg",
                   label: "FireWork",
                   category: "firework",
                 },
@@ -502,7 +502,7 @@ function MainPage() {
                   category: "engagement-decoration",
                 },
                 {
-                  img: "https://th.bing.com/th/id/OIP.rbmmHX1YcX_1aNspE9Rr9wHaHq?w=187&h=194&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3",
+                  img: "/babyshower2.jpg",
                   label: "Baby Shower Decoration",
                   category: "baby-shower-decoration",
                 },
@@ -542,7 +542,7 @@ function MainPage() {
                   category: "annaprashan-decoration",
                 },
                 {
-                  img: "https://th.bing.com/th/id/OIP.yewiWDAPFqJr0tyCFxbjzgHaE8?w=266&h=180&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3",
+                  img: "/birthdayentry2.jpg",
                   label: "Birthday baby Entry",
                   category: "birthday-baby-entry",
                 },
@@ -580,7 +580,7 @@ function MainPage() {
               {/* Example categories, replace with your actual data if needed */}
               {[
                 {
-                  img: "https://th.bing.com/th/id/OIP.rbmmHX1YcX_1aNspE9Rr9wHaHq?w=187&h=194&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3",
+                  img: "/babyshower.jpg",
                   label: "Baby shower Decoration",
                   category: "baby-shower-decoration",
                 },
@@ -620,7 +620,7 @@ function MainPage() {
                   category: "room-decoration",
                 },
                 {
-                  img: "https://i.pinimg.com/736x/5d/c4/34/5dc434d0a4ed3dd346f74614fea95130.jpg",
+                  img: "/birthdayentry.jpg",
                   label: "Baby Entry Decoration",
                   category: "birthday-baby-entry",
                 },
@@ -674,7 +674,7 @@ function MainPage() {
                   category: "flower-decoration",
                 },
                 {
-                  img: "https://tse3.mm.bing.net/th/id/OIP.yyZfOEmNvkOGQoRO0gxzMQHaHa?rs=1&pid=ImgDetMain&o=7&rm=3",
+                  img: "firework2.jpg",
                   label: "FireWorks",
                   category: "fireworks",
                 },
@@ -832,6 +832,19 @@ function MainPage() {
                   <li className="text-gray-800 font-bold">
                     → Wedding Firework
                   </li>
+                     <li className="text-gray-800 font-bold">
+                    → Birthday Baby Entry
+                  </li>
+                     <li className="text-gray-800 font-bold">
+                    → Jumping Sliding and Cartoon character
+                  </li>
+                     <li className="text-gray-800 font-bold">
+                    → Room Decoration 
+                  </li>
+                     <li className="text-gray-800 font-bold">
+                    → Surprise Decoration
+                  </li>
+
                 </ul>
               </div>
             </div>
@@ -1027,9 +1040,9 @@ function MainPage() {
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent"
                   >
                     <option value="">Select Event Type</option>
-                    {services.map((service, index) => (
-                      <option key={index} value={service.title}>
-                        {service.title}
+                    {category.map((service, index) => (
+                      <option key={index} value={service.category}>
+                        {service.category}
                       </option>
                     ))}
                   </select>
