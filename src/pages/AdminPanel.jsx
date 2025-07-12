@@ -7,7 +7,7 @@ function AdminPanel() {
     images: [],
   });
   const [selectedImage, setSelectedImage] = React.useState(null);
-  const [isLoading, setIsLoading] = React.useState(false); // Loader state
+  const [isLoading, setIsLoading ] = React.useState(false); // Loader state
 
   const handleAdminInputChange = (e) => {
     setAdminForm({ ...adminForm, [e.target.name]: e.target.value });
