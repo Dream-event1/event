@@ -287,46 +287,56 @@ function MainPage() {
 
         {/* Admin Modal */}
         {showAdminModal && (
-  <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-    <div className="bg-white rounded-lg shadow-lg p-8 max-w-sm w-full relative">
-      <button
-        className="absolute top-2 right-2 text-gray-500 hover:text-pink-600"
-        onClick={() => setShowAdminModal(false)}
-      >
-        &times;
-      </button>
-      <h2 className="text-xl font-bold mb-4 text-pink-600">Enter Admin Key</h2>
-      <form onSubmit={handleAdminKeySubmit} className="space-y-4">
-        <input
-          type="password"
-          value={adminKey}
-          onChange={(e) => setAdminKey(e.target.value)}
-          placeholder="Enter key"
-          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500"
-          required
-        />
-        <button
-          type="submit"
-          className="w-full bg-pink-600 hover:bg-pink-700 text-white py-2 rounded-lg font-semibold"
-        >
-          Submit
-        </button>
-      </form>
-    </div>
-  </div>
-        )}        
-
-
+          <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+            <div className="bg-white rounded-lg shadow-lg p-8 max-w-sm w-full relative">
+              <button
+                className="absolute top-2 right-2 text-gray-500 hover:text-pink-600"
+                onClick={() => setShowAdminModal(false)}
+              >
+                &times;
+              </button>
+              <h2 className="text-xl font-bold mb-4 text-pink-600">
+                Enter Admin Key
+              </h2>
+              <form onSubmit={handleAdminKeySubmit} className="space-y-4">
+                <input
+                  type="password"
+                  value={adminKey}
+                  onChange={(e) => setAdminKey(e.target.value)}
+                  placeholder="Enter key"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500"
+                  required
+                />
+                <button
+                  type="submit"
+                  className="w-full bg-pink-600 hover:bg-pink-700 text-white py-2 rounded-lg font-semibold"
+                >
+                  Submit
+                </button>
+              </form>
+            </div>
+          </div>
+        )}
 
         {/* Header */}
         <header className="bg-white/90 backdrop-blur-md shadow-sm fixed w-full top-0 z-50">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex justify-between items-center py-4">
+              {/* Logo and Brand Name in a single line */}
               <div className="flex items-center">
-                <div className="text-2xl font-bold text-pink-600">
-                  ✨ Dream Event
+                <div className="flex items-center space-x-3">
+                  <img
+                    src="/DREAMEVENTLOGO.jpg"
+                    alt="Dream Event Logo"
+                    className="w-10 h-10 object-cover rounded-full bg-white"
+                    style={{ background: "white" }}
+                  />
+                  <span className="text-2xl font-bold text-pink-600">
+                    Dream Event
+                  </span>
                 </div>
               </div>
+              {/* Desktop Navigation */}
               <nav className="hidden md:flex space-x-8">
                 <a
                   href="#home"
@@ -340,7 +350,6 @@ function MainPage() {
                 >
                   Services
                 </a>
-
                 <a
                   href="#contact"
                   className="text-gray-700 hover:text-pink-600 transition-colors"
@@ -355,6 +364,7 @@ function MainPage() {
                   Admin Panel
                 </Link>
               </nav>
+              {/* Mobile Menu Button */}
               <div className="md:hidden">
                 <button onClick={toggleMobileMenu} className="text-gray-700">
                   <i
@@ -367,7 +377,7 @@ function MainPage() {
                 </button>
               </div>
             </div>
-            {/* Mobile Menu */}
+            {/* Mobile Navigation */}
             {isMobileMenuOpen && (
               <div className="md:hidden bg-white/90 backdrop-blur-md shadow-lg rounded-b-2xl px-4 py-6">
                 <nav className="flex flex-col space-y-4">
@@ -832,19 +842,16 @@ function MainPage() {
                   <li className="text-gray-800 font-bold">
                     → Wedding Firework
                   </li>
-                     <li className="text-gray-800 font-bold">
+                  <li className="text-gray-800 font-bold">
                     → Birthday Baby Entry
                   </li>
-                     <li className="text-gray-800 font-bold">
+                  <li className="text-gray-800 font-bold">
                     → Jumping Sliding and Cartoon character
                   </li>
-                     <li className="text-gray-800 font-bold">
-                    → Room Decoration 
-                  </li>
-                     <li className="text-gray-800 font-bold">
+                  <li className="text-gray-800 font-bold">→ Room Decoration</li>
+                  <li className="text-gray-800 font-bold">
                     → Surprise Decoration
                   </li>
-
                 </ul>
               </div>
             </div>
@@ -1124,7 +1131,19 @@ function MainPage() {
           <div className="max-w-7xl mx-auto">
             <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
               <div>
-                <h3 className="text-2xl font-bold mb-4">✨ Dream Event</h3>
+                 <div className="flex items-center">
+                <div className="flex items-center space-x-3">
+                  <img
+                    src="/DREAMEVENTLOGO.jpg"
+                    alt="Dream Event Logo"
+                    className="w-10 h-10 object-cover rounded-full bg-white"
+                    style={{ background: "white" }}
+                  />
+                  <span className="text-2xl font-bold text-pink-600">
+                    Dream Event
+                  </span>
+                </div>
+              </div>
                 <p className="text-gray-300">
                   Creating magical moments and unforgettable experiences for
                   your special occasions.
@@ -1161,9 +1180,12 @@ function MainPage() {
               <div>
                 <h4 className="text-lg font-semibold mb-4">Follow Us</h4>
                 <div className="flex space-x-4">
-                  {/* <a href="#" className="text-gray-300 hover:text-pink-400">
-                <i className="fab fa-facebook text-2xl"></i>
-              </a> */}
+                  <a
+                    href="https://www.facebook.com/profile.php?id=61562977648265"
+                    className="text-gray-300 hover:text-pink-400"
+                  >
+                    <i className="fab fa-facebook text-2xl"></i>
+                  </a>
                   <a
                     href="https://www.instagram.com/dream_events88/"
                     className="text-gray-300 hover:text-pink-400"

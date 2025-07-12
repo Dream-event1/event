@@ -6,8 +6,8 @@ function AdminPanel() {
     category: "select one",
     images: [],
   });
-
   const [selectedImage, setSelectedImage] = React.useState(null);
+  const [isLoading, setIsLoading] = React.useState(false); // Loader state
 
   const handleAdminInputChange = (e) => {
     setAdminForm({ ...adminForm, [e.target.name]: e.target.value });
@@ -16,9 +16,9 @@ function AdminPanel() {
     setAdminForm({ ...adminForm, images: Array.from(e.target.files) });
   };
 
-
   const handleAdminSubmit = async (e) => {
     e.preventDefault();
+    setIsLoading(true); // Start loader
     const formData = new FormData();
     formData.append("category", adminForm.category);
     adminForm.images.forEach((image) => formData.append("images", image));
@@ -36,35 +36,12 @@ function AdminPanel() {
       }
       alert("Images uploaded successfully!");
       setAdminForm({ category: "welcome_baby", images: [] });
-
-      // Refresh images
-      const updatedImages = await fetch(
-        "https://event-manager-backend-sj89.onrender.com/api/images"
-      ).then((res) => res.json());
-      const heroData = updatedImages.find((item) => item.category === "hero");
-      setHeroImages(heroData ? heroData.imageUrls : []);
-      const serviceData = predefinedCategories.map((category) => {
-        const backendData = updatedImages.find(
-          (item) => item.category === category.category
-        );
-        return {
-          ...category,
-          imageUrls: backendData ? backendData.imageUrls : [],
-        };
-      });
-      setServices(serviceData);
-      setVisibleImageCounts(
-        serviceData.reduce(
-          (acc, item, index) => ({
-            ...acc,
-            [index]: Math.min(4, item.imageUrls.length),
-          }),
-          {}
-        )
-      );
+      // ...refresh logic...
     } catch (error) {
       console.error("Error uploading images:", error);
       alert("Failed to upload images.");
+    } finally {
+      setIsLoading(false); // Stop loader
     }
   };
 
@@ -113,9 +90,15 @@ function AdminPanel() {
             <button
               type="submit"
               className="w-full bg-pink-600 hover:bg-pink-700 text-white py-3 px-6 rounded-lg font-semibold transition-colors"
+              disabled={isLoading}
             >
-              Upload Images
+              {isLoading ? "Uploading..." : "Upload Images"}
             </button>
+            {isLoading && (
+              <div className="flex justify-center mt-4">
+                <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-pink-600"></div>
+              </div>
+            )}
           </form>
         </div>
       </section>

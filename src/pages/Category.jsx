@@ -193,7 +193,19 @@ function CategoryPage() {
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             <div>
-              <h3 className="text-2xl font-bold mb-4">✨ Dream Event</h3>
+               <div className="flex items-center">
+                <div className="flex items-center space-x-3">
+                  <img
+                    src="/DREAMEVENTLOGO.jpg"
+                    alt="Dream Event Logo"
+                    className="w-10 h-10 object-cover rounded-full bg-white"
+                    style={{ background: "white" }}
+                  />
+                  <span className="text-2xl font-bold text-pink-600">
+                    Dream Event
+                  </span>
+                </div>
+              </div>
               <p className="text-gray-300">
                 Creating magical moments and unforgettable experiences for your
                 special occasions.
@@ -240,6 +252,12 @@ function CategoryPage() {
                   className="text-gray-300 hover:text-pink-400"
                 >
                   <i className="fab fa-instagram text-2xl"></i>
+                </a>
+                 <a
+                  href="https://www.facebook.com/profile.php?id=61562977648265"
+                  className="text-gray-300 hover:text-pink-400"
+                >
+                  <i className="fab fa-facebook text-2xl"></i>
                 </a>
               </div>
             </div>
