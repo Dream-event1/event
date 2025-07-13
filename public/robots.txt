@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://dreameventsdecor.in/sitemap.xml
