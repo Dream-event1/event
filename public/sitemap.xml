@@ -1,4 +1,18 @@
+https://dreameventsdecor.in (with 's')
+``>
 
+---
+
+## ✅ Solution: Update `sitemap.xml` with the correct domain
+
+You need to **update your `sitemap.xml` file** so that the URLs match your actual domain:  
+**`dreameventsdecor.in`**
+
+---
+
+### ✅ Corrected `sitemap.xml`:
+
+```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
