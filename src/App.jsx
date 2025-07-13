@@ -13,7 +13,7 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<MainPage />} />
-        <Route path="/category" element={<CategoryPage />} />
+        <Route path="/category/:categoryName" element={<CategoryPage />} />
          <Route path="/admin-panel" element={<AdminPanel />} />
       </Routes>
     </BrowserRouter>
