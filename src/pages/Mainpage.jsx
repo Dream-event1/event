@@ -137,11 +137,9 @@ function MainPage() {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleCategoryClick = (category) => {
-    console.log(category);
-    localStorage.setItem("SelectedCategory", category);
-    navigate("/category");
-  };
+const handleCategoryClick = (category) => {
+  navigate(`/category/${category}`);
+};
   // const handleShowMore = (serviceIndex) => {
   //   setVisibleImageCounts((prev) => {
   //     const currentCount = prev[serviceIndex] || 4;
