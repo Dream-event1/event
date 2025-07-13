@@ -1,10 +1,12 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import categoryData from "./category";
 
 function CategoryPage() {
   //   const router = useRouter();
+    const { categoryName } = useParams();
   const [categoryInfo, setCategoryInfo] = useState(null);
   const [images, setImages] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -13,21 +15,19 @@ function CategoryPage() {
 
   // Fetch category and images
   useEffect(() => {
-    const category = localStorage.getItem("SelectedCategory");
-    console.log(category);
-    if (!category) {
+    if (!categoryName) {
       setError("No category selected");
       setLoading(false);
       return;
     }
 
-    const info = categoryData.find((cat) => cat.category === category);
+    const info = categoryData.find((cat) => cat.category === categoryName);
     if (!info) {
       setError("Invalid category");
       setLoading(false);
       return;
     }
-    setCategoryInfo(info);
+  setCategoryInfo(info);
 
     const fetchImages = async () => {
       try {
@@ -38,8 +38,8 @@ function CategoryPage() {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
         const data = await response.json();
-        const categoryData = data.find((item) => item.category === category);
-        setImages(categoryData ? categoryData.imageUrls : []);
+        const categoryDataObj = data.find((item) => item.category === categoryName);
+        setImages(categoryDataObj ? categoryDataObj.imageUrls : []);
       } catch (err) {
         setError("Failed to fetch images");
         console.error(err);
@@ -49,7 +49,7 @@ function CategoryPage() {
     };
 
     fetchImages();
-  }, []);
+  }, [categoryName]);
 
   // Handle image click for full-size modal
   const handleImageClick = (image) => {
