@@ -25,7 +25,7 @@ function AdminPanel() {
 
     try {
       const response = await fetch(
-        "https://backend-1-l4q3.onrender.com/api/images",
+        "https://backend-1re7.onrender.com/api/images",
         {
           method: "POST",
           body: formData,
