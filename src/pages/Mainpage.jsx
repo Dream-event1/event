@@ -1163,6 +1163,11 @@ const handleCategoryClick = (category) => {
                       Gallery
                     </a>
                   </li>
+                   <li>
+                    <Link to="/about" className="hover:text-pink-400">
+                      About
+                    </Link>
+                  </li>
                   <li>
                     <a href="#services" className="hover:text-pink-400">
                       Services
