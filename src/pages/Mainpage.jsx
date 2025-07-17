@@ -674,7 +674,7 @@ const handleCategoryClick = (category) => {
                 {
                   img: "https://th.bing.com/th/id/OIP.yK_Dm6YWF_-CgpkAh-fRxwHaHa?w=184&h=185&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3",
                   label: "Haldi & Mehendi Decoration",
-                  category: "haldi-mehendi-decoration",
+                  category: "haldi-mehendi",
                 },
                 {
                   img: "https://th.bing.com/th/id/OIP.BeHUaZ9nPkfjQInm94pHpgHaE7?w=274&h=182&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3",
@@ -684,7 +684,7 @@ const handleCategoryClick = (category) => {
                 {
                   img: "firework2.jpg",
                   label: "FireWorks",
-                  category: "fireworks",
+                  category: "firework",
                 },
                 {
                   img: "https://th.bing.com/th/id/OIP.bmD21QvgXpnrfK4rW-9BRwHaF9?w=205&h=180&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3",
@@ -704,6 +704,7 @@ const handleCategoryClick = (category) => {
                 {
                   img: "https://tse2.mm.bing.net/th/id/OIP.VqcPoKcsSEnsM1UacAxhmAAAAA?rs=1&pid=ImgDetMain&o=7&rm=3",
                   label: "Engagement Decoration",
+                  category:"engagement-decoration",
                 },
                 {
                   img: "https://th.bing.com/th/id/OIP.lPF2NDkfSC5Ke5mit0ZHRAHaE7?w=266&h=180&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3",
