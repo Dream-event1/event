@@ -598,7 +598,7 @@ const handleCategoryClick = (category) => {
                   category: "welcome-baby-decoration",
                 },
                 {
-                  img: "https://th.bing.com/th/id/OIF.qe1kSWqLCkDwDuAKxw5pXA?w=294&h=180&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3",
+                  img: "https://th.bing.com/th/id/OIP.vofBuEl83QAaevsi6EOTcgHaHa?w=197&h=197&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3",
                   label: "Birthday Theme Decoration",
                   category: "birthday-theme-decoration",
                 },
