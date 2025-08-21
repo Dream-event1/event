@@ -211,9 +211,12 @@ function CategoryPage() {
                 special occasions.
               </p>
             </div>
-            <div>
-              <h4 className="text-lg font-semibold mb-4"><Link to="/">Service</Link></h4>
-            </div>
+           <div>
+                <h4 className="text-lg font-semibold mb-4">Address</h4>
+                 <p className="text-gray-300">
+                 ADDRESS: WOARD 10, DEEPAK KIRANA STORE, NEAR VISHDAM PUBLIC SCHOOL, BHIM NAGAR, SUPELA, BHILAI, CHHATTISGARH 490023
+                </p>
+              </div>
             <div>
               <h4 className="text-lg font-semibold mb-4">
                 {" "}
