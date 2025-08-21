@@ -997,7 +997,7 @@ const handleCategoryClick = (category) => {
                   <div className="flex items-center">
                     <i className="fas fa-map-marker-alt text-pink-600 text-xl w-8"></i>
                     <span className="text-gray-700">
-                      ADDRESS: WOARD 10, DEEPAK KIRANA STORE, NEAR VISHDAM PUBLIC SCHOOL, BHIM NAGAR, SUPELA, BHILAI, CHHATTISGARH 490023
+                      WOARD 10, DEEPAK KIRANA STORE, NEAR VISHDAM PUBLIC SCHOOL, BHIM NAGAR, SUPELA, BHILAI, CHHATTISGARH 490023
                     </span>
                   </div>
                 </div>
@@ -1151,7 +1151,7 @@ const handleCategoryClick = (category) => {
               <div>
                 <h4 className="text-lg font-semibold mb-4">Address</h4>
                  <p className="text-gray-300">
-                 ADDRESS: WOARD 10, DEEPAK KIRANA STORE, NEAR VISHDAM PUBLIC SCHOOL, BHIM NAGAR, SUPELA, BHILAI, CHHATTISGARH 490023
+                  WOARD 10, DEEPAK KIRANA STORE, NEAR VISHDAM PUBLIC SCHOOL, BHIM NAGAR, SUPELA, BHILAI, CHHATTISGARH 490023
                 </p>
               </div>
               <div>
